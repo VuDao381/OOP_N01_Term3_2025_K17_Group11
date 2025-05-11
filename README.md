@@ -9,7 +9,11 @@ GROUP 11
 3.Nguyen Le Thu
 
 
+
 Tiêu đề: Hệ thống quản lí rạp chiếu phim.
+
+
+3 Đối tượng chính:
 
 1. Movie (Phim):
 •	Đại diện cho thông tin của một bộ phim đang được chiếu tại rạp.
