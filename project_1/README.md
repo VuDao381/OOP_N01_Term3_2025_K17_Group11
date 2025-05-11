@@ -1,18 +1,49 @@
-## Getting Started
+Tiêu đề: Hệ thống quản lí rạp chiếu phim.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
-## Folder Structure
+3 Đối tượng chính:
 
-The workspace contains two folders by default, where:
+1. Movie (Phim):
+•	Đại diện cho thông tin của một bộ phim đang được chiếu tại rạp.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+•	Thuộc tính chính:
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+movie_id: mã phim
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+title: tên phim
 
-## Dependency Management
+genre: thể loại
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+duration: thời lượng (phút)
+
+rating: độ tuổi phù hợp
+
+ 2.Customer (Khách hàng):
+
+•	Là người mua vé xem phim tại rạp.
+
+•	Thuộc tính chính:
+
+customer_id: mã khách hàng
+
+name: họ tên
+
+email: địa chỉ liên hệ
+
+phone: số điện thoại
+
+3.Ticket (Vé):
+
+•	Đại diện cho việc đặt vé của khách hàng cho một bộ phim cụ thể.
+
+•	Thuộc tính chính:
+
+ticket_id: mã vé
+
+movie: thông tin phim
+
+customer: người mua vé
+
+seat_number: số ghế
+
+is_paid: trạng thái thanh toán
