@@ -1,4 +1,5 @@
 public class User {
+    public String userid;
     public String name;
     public String email;
     public String password;
