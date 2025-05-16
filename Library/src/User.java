@@ -27,8 +27,4 @@ public class User {
         this.userpassword = password;
     }
 
-    public void displayUserInfo() {
-        System.out.println("Name: " + username);
-        System.out.println("Email: " + useremail);
-    }
 }
