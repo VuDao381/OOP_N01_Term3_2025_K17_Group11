@@ -34,6 +34,11 @@ Quản lí phiếu mượn
 + Cho phép mượn/trả sách, tự động tính ngày mượn/trả.
 + Không cho phép mượn nếu sách không còn tồn kho.
 
+- Dữ liệu được lưu trữ xuống file nhị phân
+
++ Cần tạo các lớp liên quan đến Người dùng (User), Sách (Book), và Phiếu mượn (Borrow Slip) để đọc, ghi xuống 1 hay nhiều file.
+
+- Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được lưu trữ dưới dạng các Collection tùy chọn như ArrayList, LinkedList, Map, ....
 
  Sơ đồ Class Diagram
 
