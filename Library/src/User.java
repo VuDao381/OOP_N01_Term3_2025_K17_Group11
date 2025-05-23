@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class User {
     private String username;
     private int userid;
@@ -15,7 +17,7 @@ public class User {
         return username;
     }
 
-    public int getUID(){
+    public int getUID() {
         return userid;
     }
 
@@ -35,3 +37,4 @@ public class User {
     }
 
 }
+
