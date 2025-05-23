@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class User {
     private String username;
     private int userid;
@@ -29,9 +27,8 @@ public class User {
         return userpassword;
     }
 
-    public void setUser(String name, int userid, String email, String password) {
+    public void setUser(String name, String email, String password) {
         this.username = name;
-        this.userid = userid;
         this.useremail = email;
         this.userpassword = password;
     }

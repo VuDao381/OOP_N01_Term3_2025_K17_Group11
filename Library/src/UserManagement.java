@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class UserManagement {
 
-    // ======= LỚP QUẢN LÝ USER =======
 
     private ArrayList<User> users = new ArrayList<>();
 
@@ -13,7 +12,7 @@ public class UserManagement {
     public boolean editUser(int userId, String newName, String newEmail, String newPassword) {
         for (User user : users) {
             if (user.getUID() == userId) {
-                user.setUser(newName, userId, newEmail, newPassword);
+                user.setUser(newName, newEmail, newPassword);
                 return true;
             }
         }
