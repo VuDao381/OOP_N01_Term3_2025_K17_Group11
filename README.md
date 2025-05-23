@@ -40,6 +40,19 @@ Quản lí phiếu mượn
 
 - Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được lưu trữ dưới dạng các Collection tùy chọn như ArrayList, LinkedList, Map, ....
 
+ # Sơ đô cấu trúc
+
  Sơ đồ Class Diagram
 
 ![uml](https://github.com/user-attachments/assets/a0d001b8-3d16-4f41-97ba-bf6f10af3462)
+
+
+# Sơ đồ hành vi
+
+## Thêm
+
+## Sửa
+
+
+## Xóa
+
