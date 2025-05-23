@@ -3,12 +3,14 @@ public class Book {
     private String author;
     private String publisher;
     private int numPages;
+    private int quantity;
 
-    public Book(String title, String author, String publisher, int numPages){
+    public Book(String title, String author, String publisher, int numPages, int quantity){
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.numPages = numPages;
+        this.quantity = quantity;
     }
     public String getTitle(){
         return title;
@@ -22,10 +24,15 @@ public class Book {
     public int getNumPages(){
         return numPages;
     }
-    public void setBook(String title, String author, String publisher, int numPages){
+    public int getQuantity(){
+        return quantity;
+    }
+
+    public void setBook(String title, String author, String publisher, int numPages, int quantity){
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.numPages = numPages;
+        this.quantity = quantity;
     }
 }
