@@ -1,5 +1,5 @@
 public class TestBookManagement {
-    public static void testbook(String[] args) {
+    public static void testbook() {
         BookManagement bm = new BookManagement();
 
         Book b1 = new Book("Lập trình Java", "Nguyễn Văn A", "NXB Trẻ", 500, 10);
