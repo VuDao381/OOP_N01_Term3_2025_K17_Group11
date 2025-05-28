@@ -46,6 +46,10 @@ Quản lí phiếu mượn
 
 ![uml](https://github.com/user-attachments/assets/a0d001b8-3d16-4f41-97ba-bf6f10af3462)
 
+Login Activity Diagram
+
+![login-activity](https://github.com/user-attachments/assets/7e711582-4b7e-4229-93a5-d3e16a44c86c)
+
 
 # Sơ đồ hành vi
 
