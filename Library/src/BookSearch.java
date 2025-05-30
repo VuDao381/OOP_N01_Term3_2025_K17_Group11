@@ -5,6 +5,7 @@ public class BookSearch {
 
     public List<Book> searchByTitleOrAuthor(List<Book> books, String keyword) {
         String lowerKeyword = keyword.toLowerCase();
+      
         return books.stream()
                 .filter(book -> book.getTitle().toLowerCase().contains(lowerKeyword) 
                              || book.getAuthor().toLowerCase().contains(lowerKeyword)
