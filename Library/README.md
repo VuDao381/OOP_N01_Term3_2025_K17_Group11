@@ -19,3 +19,9 @@ Là đối tượng trung tâm trong thư viện.
 Đại diện cho việc người dùng mượn một hoặc nhiều cuốn sách.
 
 Đặc điểm: mã phiếu, ngày mượn, ngày trả dự kiến, danh sách sách, trạng thái (đã trả/chưa trả).
+
+
+
+Test Search
+
+![oop1](https://github.com/user-attachments/assets/2d6f027d-7922-4075-9dd1-27d3022327df)
