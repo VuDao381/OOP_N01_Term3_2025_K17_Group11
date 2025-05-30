@@ -11,7 +11,7 @@ public class BookManagement {
                     && book.getPublisher().equalsIgnoreCase(newBook.getPublisher())) {
                 // Nếu sách đã có, cộng dồn số lượng
                 int updatedQuantity = book.getQuantity() + newBook.getQuantity();
-                book.setBook(book.getTitle(), book.getAuthor(), book.getPublisher(), book.getNumPages(), updatedQuantity);
+                book.setQuantity(updatedQuantity);
                 return;
             }
         }
@@ -37,5 +37,8 @@ public class BookManagement {
                                " | Số trang: " + book.getNumPages() +
                                " | Số lượng: " + book.getQuantity());
         }
+    }
+    public ArrayList<Book> getBooks() {
+        return books;
     }
 }

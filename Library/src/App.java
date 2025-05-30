@@ -4,6 +4,7 @@ public class App {
         //UserTest.Test();
         //BookTest.TestBook();
         //BorrowSlipTest.testBorrowSlip();
-        TestUser.testEditDelete();
+        //TestUser.testEditDelete();
+        BookSearchTestHelper.testSearchWithInput();
     }
 }
