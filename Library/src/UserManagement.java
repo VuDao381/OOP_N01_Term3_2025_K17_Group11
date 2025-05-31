@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class UserManagement {
 
-
     private ArrayList<User> users = new ArrayList<>();
 
     public void addUser(User user) {
@@ -35,4 +34,7 @@ public class UserManagement {
                     " | Email: " + user.getEmail());
         }
     }
+    public boolean isEmpty() {
+    return users.isEmpty();
+}
 }
