@@ -7,7 +7,5 @@ public class App {
         //TestUser.testEditDelete();
        // TestBookManagement.testbook();
         BookSearchTestHelper.testSearchWithInput();
-        BookSearchTestHelper.testSearchWithInput();
->>>>>>> main
     }
 }
