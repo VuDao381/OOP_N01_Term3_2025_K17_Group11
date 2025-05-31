@@ -4,12 +4,7 @@ import java.util.Scanner;
 public class BookSearchTestHelper {
 
     public static void testSearchWithInput() {
-        // Khởi tạo BookManagement và thêm sách
-        BookManagement bm = new BookManagement();
-        bm.addBook(new Book("Java Programming", "Nguyen Van A", "NXB Tre", 500, 10));
-        bm.addBook(new Book("Python Basics", "Le Thi B", "NXB Tre", 350, 5));
-        bm.addBook(new Book("Effective Java", "Joshua Bloch", "Addison-Wesley", 400, 3));
-        bm.addBook(new Book("C++ Primer", "Stanley Lippman", "Addison-Wesley", 450, 7));
+        
 
         // Tạo scanner để đọc từ bàn phím
         Scanner scanner = new Scanner(System.in);
