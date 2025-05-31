@@ -11,7 +11,11 @@ public class BookManagement {
                     && book.getPublisher().equalsIgnoreCase(newBook.getPublisher())) {
                 // Nếu sách đã có, cộng dồn số lượng
                 int updatedQuantity = book.getQuantity() + newBook.getQuantity();
+<<<<<<< HEAD
                 book.setQuantity(updatedQuantity);
+=======
+                book.setQuantity(updatedQuantity);  // Dùng setter riêng thay vì setBook toàn bộ
+>>>>>>> main
                 return;
             }
         }
@@ -32,12 +36,17 @@ public class BookManagement {
         }
         for (Book book : books) {
             System.out.println("Tiêu đề: " + book.getTitle() +
-                               " | Tác giả: " + book.getAuthor() +
-                               " | Nhà xuất bản: " + book.getPublisher() +
-                               " | Số trang: " + book.getNumPages() +
-                               " | Số lượng: " + book.getQuantity());
+                    " | Tác giả: " + book.getAuthor() +
+                    " | Nhà xuất bản: " + book.getPublisher() +
+                    " | Số trang: " + book.getNumPages() +
+                    " | Số lượng: " + book.getQuantity());
         }
     }
+<<<<<<< HEAD
+=======
+
+    // Getter danh sách sách (dùng cho việc tìm kiếm...)
+>>>>>>> main
     public ArrayList<Book> getBooks() {
         return books;
     }
