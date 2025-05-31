@@ -11,7 +11,11 @@ public class BookManagement {
                     && book.getPublisher().equalsIgnoreCase(newBook.getPublisher())) {
                 // Nếu sách đã có, cộng dồn số lượng
                 int updatedQuantity = book.getQuantity() + newBook.getQuantity();
+<<<<<<< HEAD
+                book.setQuantity(updatedQuantity);
+=======
                 book.setQuantity(updatedQuantity);  // Dùng setter riêng thay vì setBook toàn bộ
+>>>>>>> main
                 return;
             }
         }
@@ -38,8 +42,11 @@ public class BookManagement {
                     " | Số lượng: " + book.getQuantity());
         }
     }
+<<<<<<< HEAD
+=======
 
     // Getter danh sách sách (dùng cho việc tìm kiếm...)
+>>>>>>> main
     public ArrayList<Book> getBooks() {
         return books;
     }

@@ -1,12 +1,13 @@
 public class User {
     private String username;
+    private static int uid = 1;
     private int userid;
     private String useremail;
     private String userpassword;
 
-    public User(String name, int userid, String email, String password) {
+    public User(String name, String email, String password) {
         this.username = name;
-        this.userid = userid;
+        this.userid = uid++;
         this.useremail = email;
         this.userpassword = password;
     }
