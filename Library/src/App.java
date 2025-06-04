@@ -6,6 +6,7 @@ public class App {
         //BorrowSlipTest.testBorrowSlip();
         //TestUser.testEditDelete();
         //TestBookManagement.testbook();
-        BookSearchTestHelper.testSearchWithInput();
+        //BookSearchTestHelper.testSearchWithInput();
+        TestSequence.test();
     }
 }
