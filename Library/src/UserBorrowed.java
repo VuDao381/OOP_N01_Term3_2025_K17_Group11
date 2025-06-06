@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,5 +33,28 @@ public class UserBorrowed {
             }
         }
         return null; // Trả về null nếu không tìm thấy sách
+    }
+    public void notifyUpcomingDueDates() {
+        LocalDate today = LocalDate.now();
+        boolean hasNotice = false;
+
+        System.out.println("== THÔNG BÁO SÁCH SẮP ĐẾN HẠN TRẢ ==");
+
+        for (BorrowSlip slip : borrowSlips) {
+            LocalDate dueDate = slip.getDueDate();
+            if (!slip.isReturned() && (dueDate.isEqual(today) || 
+                (dueDate.isAfter(today))) ) {
+
+                hasNotice = true;
+                System.out.println("📚 Sách: " + slip.getBookTitle());
+                System.out.println("   - ID người mượn: " + slip.getUID());
+                System.out.println("   - Hạn trả: " + dueDate);
+                System.out.println();
+            }
+        }
+
+        if (!hasNotice) {
+            System.out.println("Không có sách nào sắp đến hạn trả.");
+        }
     }
 }

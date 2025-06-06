@@ -7,13 +7,16 @@ public class testUserBorrowed {
         User user1 = new User("Nguyen A", "nguyena@email.com", "password123");
         User user2 = new User("Tran B", "tranb@email.com", "password456");
 
-        // ✅ Tạo các phiếu mượn với LocalDate
+        // Tạo các phiếu mượn với LocalDate
         BorrowSlip borrowSlip1 = new BorrowSlip("Cuốn sách 1", user1.getUID(),
                 LocalDate.of(2025, 6, 1), LocalDate.of(2025, 6, 15));
         BorrowSlip borrowSlip2 = new BorrowSlip("Cuốn sách 2", user1.getUID(),
                 LocalDate.of(2025, 6, 5), LocalDate.of(2025, 6, 19));
         BorrowSlip borrowSlip3 = new BorrowSlip("Cuốn sách 3", user2.getUID(),
                 LocalDate.of(2025, 6, 10), LocalDate.of(2025, 6, 20));
+
+        // Giả sử sách thứ 2 đã trả rồi, đặt lại trạng thái trả
+        borrowSlip2.setReturned(false);
 
         // Quản lý phiếu mượn của người dùng
         UserBorrowed userBorrowed = new UserBorrowed();
@@ -35,7 +38,8 @@ public class testUserBorrowed {
             System.out.println("Đã tìm thấy phiếu mượn cho 'Cuốn sách 2':");
             System.out.println("- " + slip.getBookTitle() +
                     " (Ngày mượn: " + slip.getBorrowDate() +
-                    ", Hạn trả: " + slip.getDueDate() + ")");
+                    ", Hạn trả: " + slip.getDueDate() +
+                    ", Đã trả: " + slip.isReturned() + ")");  // Hiển thị trạng thái trả
         } else {
             System.out.println("Không tìm thấy phiếu mượn cho 'Cuốn sách 2'");
         }
@@ -51,5 +55,9 @@ public class testUserBorrowed {
         } else {
             System.out.println("Không tìm thấy phiếu mượn cho 'Cuốn sách 4'");
         }
+
+        // Thông báo sách sắp đến hạn trả (chỉ sách chưa trả)
+        System.out.println("\n----- Thông báo sách sắp đến hạn trả -----");
+        userBorrowed.notifyUpcomingDueDates();
     }
 }
