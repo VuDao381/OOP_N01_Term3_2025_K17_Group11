@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class testUserBorrowed {
     // Hàm kiểm tra các chức năng của hệ thống
     public static void test() {
@@ -5,10 +7,13 @@ public class testUserBorrowed {
         User user1 = new User("Nguyen A", "nguyena@email.com", "password123");
         User user2 = new User("Tran B", "tranb@email.com", "password456");
 
-        // Tạo các phiếu mượn
-        BorrowSlip borrowSlip1 = new BorrowSlip("Cuốn sách 1", user1.getUID(), "2025-06-01", "2025-06-15");
-        BorrowSlip borrowSlip2 = new BorrowSlip("Cuốn sách 2", user1.getUID(), "2025-06-05", "2025-06-19");
-        BorrowSlip borrowSlip3 = new BorrowSlip("Cuốn sách 3", user2.getUID(), "2025-06-10", "2025-06-20");
+        // ✅ Tạo các phiếu mượn với LocalDate
+        BorrowSlip borrowSlip1 = new BorrowSlip("Cuốn sách 1", user1.getUID(),
+                LocalDate.of(2025, 6, 1), LocalDate.of(2025, 6, 15));
+        BorrowSlip borrowSlip2 = new BorrowSlip("Cuốn sách 2", user1.getUID(),
+                LocalDate.of(2025, 6, 5), LocalDate.of(2025, 6, 19));
+        BorrowSlip borrowSlip3 = new BorrowSlip("Cuốn sách 3", user2.getUID(),
+                LocalDate.of(2025, 6, 10), LocalDate.of(2025, 6, 20));
 
         // Quản lý phiếu mượn của người dùng
         UserBorrowed userBorrowed = new UserBorrowed();
@@ -28,7 +33,9 @@ public class testUserBorrowed {
         BorrowSlip slip = userBorrowed.getBorrowSlipByBookTitle("Cuốn sách 2");
         if (slip != null) {
             System.out.println("Đã tìm thấy phiếu mượn cho 'Cuốn sách 2':");
-            System.out.println("- " + slip.getBookTitle() + " (Ngày mượn: " + slip.getBorrowDate() + ", Ngày trả: " + slip.getReturnDate() + ")");
+            System.out.println("- " + slip.getBookTitle() +
+                    " (Ngày mượn: " + slip.getBorrowDate() +
+                    ", Hạn trả: " + slip.getDueDate() + ")");
         } else {
             System.out.println("Không tìm thấy phiếu mượn cho 'Cuốn sách 2'");
         }
@@ -38,11 +45,11 @@ public class testUserBorrowed {
         BorrowSlip slipNotFound = userBorrowed.getBorrowSlipByBookTitle("Cuốn sách 4");
         if (slipNotFound != null) {
             System.out.println("Đã tìm thấy phiếu mượn cho 'Cuốn sách 4':");
-            System.out.println("- " + slipNotFound.getBookTitle() + " (Ngày mượn: " + slipNotFound.getBorrowDate() + ", Ngày trả: " + slipNotFound.getReturnDate() + ")");
+            System.out.println("- " + slipNotFound.getBookTitle() +
+                    " (Ngày mượn: " + slipNotFound.getBorrowDate() +
+                    ", Hạn trả: " + slipNotFound.getDueDate() + ")");
         } else {
             System.out.println("Không tìm thấy phiếu mượn cho 'Cuốn sách 4'");
         }
     }
 }
-        
-

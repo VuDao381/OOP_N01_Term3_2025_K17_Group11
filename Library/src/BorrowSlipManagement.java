@@ -24,7 +24,8 @@ public class BorrowSlipManagement {
             System.out.println("Sách: " + slip.getBookTitle() +
                                " | User ID: " + slip.getUID() +
                                " | Ngày mượn: " + slip.getBorrowDate() +
-                               " | Ngày trả: " + slip.getReturnDate());
+                               " | Hạn trả: " + slip.getDueDate() +
+                               " | Tình trạng:" + (slip.isReturned() ? "Đã trả" : "Chưa "));
         }
     }
 }

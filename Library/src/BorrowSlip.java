@@ -1,14 +1,17 @@
+import java.time.LocalDate;
 public class BorrowSlip {
     private String bookTitle;
     private int userid;
-    private String borrowDate;
-    private String returnDate;
+    private LocalDate borrowDate;
+    private LocalDate dueDate;
+    private boolean isReturned;
 
-    public BorrowSlip(String bookTitle, int userid, String borrowDate, String returnDate) {
+    public BorrowSlip(String bookTitle, int userid, LocalDate borrowDate, LocalDate dueDate) {
         this.bookTitle = bookTitle;
         this.userid = userid;
         this.borrowDate = borrowDate;
-        this.returnDate = returnDate;
+        this.dueDate = dueDate;
+        this.isReturned = false;
     }
     public String getBookTitle(){
         return bookTitle;
@@ -16,16 +19,22 @@ public class BorrowSlip {
     public int getUID(){
         return userid;
     }
-    public String getBorrowDate(){
+    public LocalDate getBorrowDate(){
         return borrowDate;
     }
-    public String getReturnDate(){
-        return returnDate;
+    public LocalDate getDueDate(){
+        return dueDate;
     }
-    public void setBorrowSlip(String bookTitle, int userid, String borrowDate, String returnDate){
+    public boolean isReturned(){
+        return isReturned;
+    }
+    public void setBorrowSlip(String bookTitle, int userid, LocalDate borrowDate, LocalDate dueDate){
         this.bookTitle = bookTitle;
         this.userid = userid;
         this.borrowDate = borrowDate;
-        this.returnDate = returnDate;
+        this.dueDate = dueDate;
+    }
+    public void setReturned(boolean returned) {
+    this.isReturned = returned;
     }
 }

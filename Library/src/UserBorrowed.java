@@ -16,7 +16,7 @@ public class UserBorrowed {
         for (BorrowSlip slip : borrowSlips) {
             if (slip.getUID() == userId) {
                 found = true;
-                System.out.println("- " + slip.getBookTitle() + " (Ngày mượn: " + slip.getBorrowDate() + ", Ngày trả: " + slip.getReturnDate() + ")");
+                System.out.println("- " + slip.getBookTitle() + " (Ngày mượn: " + slip.getBorrowDate() + ", Ngày trả: " + slip.getDueDate() + ")");
             }
         }
         if (!found) {

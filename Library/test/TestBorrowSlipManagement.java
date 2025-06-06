@@ -1,9 +1,15 @@
+import java.time.LocalDate;
+
 public class TestBorrowSlipManagement {
     public static void testborrowslip() {
         BorrowSlipManagement bsm = new BorrowSlipManagement();
 
-        BorrowSlip slip1 = new BorrowSlip("Lập trình Java", 12345, "2025-05-01", "2025-05-15");
-        BorrowSlip slip2 = new BorrowSlip("Cấu trúc dữ liệu", 101010, "2025-05-03", "2025-05-18");
+        // ✅ Tạo LocalDate từ chuỗi (nếu cần), hoặc dùng LocalDate.of(...)
+        BorrowSlip slip1 = new BorrowSlip("Lập trình Java", 12345,
+                LocalDate.of(2025, 5, 1), LocalDate.of(2025, 5, 15));
+
+        BorrowSlip slip2 = new BorrowSlip("Cấu trúc dữ liệu", 101010,
+                LocalDate.of(2025, 5, 3), LocalDate.of(2025, 5, 18));
 
         bsm.addBorrowSlip(slip1);
         bsm.addBorrowSlip(slip2);
