@@ -25,3 +25,18 @@ Là đối tượng trung tâm trong thư viện.
 Test Search
 
 ![oop1](https://github.com/user-attachments/assets/2d6f027d-7922-4075-9dd1-27d3022327df)
+
+
+Phương thức hoạt động chính:
+
+Hiển thị thông tin sách người dùng đã mượn và thông báo sách đã đến hạn trả.
+
+Phân công công việc:
+
+1. Phạm Khắc Hùng: Hiển thị thông tin sách người dùng đã mượn
+2. Đào Anh Vũ: thông báo cho người dùng sách đã đến hạn trả
+
+
+lƯU ĐÒ THUẬT TOÁN
+
+![project_library](https://github.com/user-attachments/assets/add54fd0-6729-4cb1-8367-bfa206e78b56)
