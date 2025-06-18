@@ -5,6 +5,7 @@ public class BookManagement {
 
     // Thêm sách mới (nếu sách cùng tiêu đề, tác giả, nhà xuất bản tồn tại thì tăng số lượng)
     public void addBook(Book newBook) {
+        try{
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(newBook.getTitle())
                     && book.getAuthor().equalsIgnoreCase(newBook.getAuthor())
@@ -15,17 +16,32 @@ public class BookManagement {
                 return;
             }
         }
-        // Nếu sách chưa có thì thêm mới
         books.add(newBook);
+    }
+    catch(Exception e){
+        System.err.println("Lỗi khi thêm sách: " + e.getMessage());
+    }
+    finally{
+        System.out.println("Kết thúc thêm sách.");
+    }
     }
 
     // Xóa sách theo tiêu đề (nếu có nhiều sách trùng tiêu đề thì xóa tất cả)
     public boolean deleteBookByTitle(String title) {
-        return books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
+        boolean removed = false;
+    try{
+        removed = books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
     }
-
-    // Xem danh sách sách
+    catch(Exception e){
+        System.err.println("Lỗi khi xóa sách:" + e.getMessage());
+    }
+    finally{
+        System.out.println("Kết thúc xóa sách.");
+    }
+    return removed;
+    }
     public void printBooks() {
+        try{
         if (books.isEmpty()) {
             System.out.println("Danh sách sách trống.");
             return;
@@ -38,6 +54,13 @@ public class BookManagement {
                     " | Số lượng: " + book.getQuantity());
         }
     }
+    catch(Exception e){
+        System.err.println("Lỗi khi hiển thị danh sách sách:" + e.getMessage());
+    }
+    finally{
+        System.out.println("Kết thúc hiển thị danh sách sách.");
+    }
+}
     public ArrayList<Book> getBooks() {
         return books;
     }
