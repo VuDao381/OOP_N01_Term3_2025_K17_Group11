@@ -12,6 +12,7 @@ public class UserBorrowed {
     }
     catch(Exception e){
         System.err.println("Lỗi khi thêm phiếu mượn vào danh sách: " + e.getMessage());
+        e.printStackTrace();
     }
     finally{
         System.out.println("Kết thúc thêm phiếu mượn vào danh sách");
@@ -35,6 +36,7 @@ public class UserBorrowed {
     }
     catch(Exception e){
         System.err.println("Lỗi khi hiển thị dánh sách sách đã mượn của người dùng: " + e.getMessage());
+        e.printStackTrace();
     }
     finally{
         System.out.println("Kết thúc hiển thị danh sách sách đã mượn của người dùng.");
@@ -52,6 +54,7 @@ public class UserBorrowed {
     }
     catch(Exception e){
         System.err.println("Lỗi khi tìm phiếu mượn của người dùng theo tên sách: " + e.getMessage());
+        e.printStackTrace();
     }
     finally{
         System.out.println("Kết thúc tìm phiếu mượn của người dùng theo tên sách.");
@@ -85,6 +88,7 @@ public class UserBorrowed {
         }
         catch(Exception e){
             System.err.println("Lỗi khi thông báo hạn trả: " + e.getMessage());
+            e.printStackTrace();
         }
         finally{
             System.out.println("Kết thúc thông báo hạn trả.");
