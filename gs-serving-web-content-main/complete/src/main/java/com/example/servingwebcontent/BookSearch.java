@@ -1,9 +1,11 @@
+package com.example.servingwebcontent;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookSearch {
-    public List<Book> searchBook(List<Book> books, String keyword) {
-        ArrayList<Book> result = null;
+    public List<Book> searchByTitleOrAuthor(List<Book> books, String keyword) {
+        List<Book> result = null;
     try{
         String lowerKeyword = keyword.toLowerCase();
         return books.stream()
@@ -14,7 +16,7 @@ public class BookSearch {
     }
     catch(Exception e){
         System.err.println("Lỗi khi tìm sách:" + e.getMessage());
-        
+        result = List.of();
     }
     finally{
         System.out.println("Kết thúc tìm sách.");

@@ -1,3 +1,5 @@
+package com.example.servingwebcontent;
+// BorrowSlipManagement.java
 import java.util.ArrayList;
 
 public class BorrowSlipManagement {
@@ -6,15 +8,10 @@ public class BorrowSlipManagement {
     // Thêm phiếu mượn mới
     public void addBorrowSlip(BorrowSlip newSlip) {
         try{
-            if (newSlip == null) {
-            System.err.println("Phiếu mượn không được là null");
-            return;
-        }
-            borrowSlips.add(newSlip);
+        borrowSlips.add(newSlip);
         }
         catch(Exception e){
             System.err.println("Lỗi khi thêm phiếu mượn: " + e.getMessage());
-            e.printStackTrace();
         }
         finally{
             System.out.println("Kết thúc thêm phiếu mượn");
@@ -27,15 +24,9 @@ public class BorrowSlipManagement {
         try{
         removed = borrowSlips.removeIf(slip -> 
             slip.getBookTitle().equalsIgnoreCase(bookTitle) && slip.getUID() == userid);
-        if (removed) {
-            System.out.println("Đã xóa phiếu mượn: " + bookTitle + " của user " + userid);
-        } else {
-            System.out.println("Không tìm thấy phiếu mượn để xóa.");
-        }
         }
         catch(Exception e){
             System.err.println("Lỗi khi xóa phiếu mượn: " + e.getMessage());
-            e.printStackTrace();
         }
         finally{
             System.out.println("Kết thúc xóa phiếu mượn");

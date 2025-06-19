@@ -1,3 +1,5 @@
+package com.example.servingwebcontent;
+// BorrowSlip.java
 import java.time.LocalDate;
 public class BorrowSlip {
     private String bookTitle;

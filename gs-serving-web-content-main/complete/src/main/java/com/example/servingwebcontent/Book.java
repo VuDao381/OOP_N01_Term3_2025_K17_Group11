@@ -1,3 +1,5 @@
+package com.example.servingwebcontent;
+// Book.java
 public class Book {
     private String title;
     private String author;

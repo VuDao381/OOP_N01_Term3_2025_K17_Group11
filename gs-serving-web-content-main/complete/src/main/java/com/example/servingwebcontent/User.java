@@ -1,3 +1,5 @@
+package com.example.servingwebcontent;
+// User.java
 public class User {
     private String username;
     private static int uid = 1;
