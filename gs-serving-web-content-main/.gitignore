@@ -1,0 +1,3 @@
+.env
+.vscode/launch.json
+gs-serving-web-content-main/initial/src/main/resources/application.properties

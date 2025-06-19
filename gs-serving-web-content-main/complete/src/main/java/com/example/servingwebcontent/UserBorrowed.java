@@ -1,9 +1,10 @@
 package com.example.servingwebcontent;
 // UserBorrowed.java
+import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+@Component 
 public class UserBorrowed {
     private List<BorrowSlip> borrowSlips = new ArrayList<>();
 
@@ -92,4 +93,7 @@ public class UserBorrowed {
             System.out.println("Kết thúc thông báo hạn trả.");
         }
     }
+    public List<BorrowSlip> getAllBorrowSlips() {
+    return borrowSlips;
+}
 }
