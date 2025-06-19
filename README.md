@@ -60,3 +60,8 @@ Login Activity Diagram
 
 ## Xóa
 
+
+Màn hình UI cho phương thức chinh
+
+![image](https://github.com/user-attachments/assets/7aa6983c-9755-4158-96f3-6b9c3ffa0e70)
+
