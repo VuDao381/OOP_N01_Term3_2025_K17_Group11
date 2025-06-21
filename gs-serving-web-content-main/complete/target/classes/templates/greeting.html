@@ -4,18 +4,336 @@
     <title>Library</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
-    <div id="div1">
-    <div class="header-content">
-      <h1>Welcome to Library</h1>
-      <form class="search-form" action="search-html" method="get">
-        <input type="text" name="q" placeholder="Nhập tên sách..." />
-        <button type="submit">Tìm kiếm</button>
-      </form>
-    <div id="div2">
-      <a href="login.html">Đăng nhập</a>
-      <a href="/user/borrowed?uid=1">Xem sách đã mượn</a>
-    </div>
-  </div>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Library Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar bg-blue-800 text-white w-64 flex-shrink-0">
+            <div class="p-4 flex items-center space-x-2 border-b border-blue-700">
+                <i class="fas fa-book-open text-2xl"></i>
+                <h1 class="text-xl font-bold">Digital Library</h1>
+            </div>
+            <nav class="mt-4">
+                <div class="px-4 py-3 cursor-pointer hover:bg-blue-700 flex items-center space-x-2 active-tab" id="dashboard-tab">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="px-4 py-3 cursor-pointer hover:bg-blue-700 flex items-center space-x-2" id="books-tab">
+                    <i class="fas fa-book"></i>
+                    <span>Books Management</span>
+                </div>
+                <div class="px-4 py-3 cursor-pointer hover:bg-blue-700 flex items-center space-x-2" id="users-tab">
+                    <i class="fas fa-users"></i>
+                    <span>Users Management</span>
+                </div>
+                <div class="px-4 py-3 cursor-pointer hover:bg-blue-700 flex items-center space-x-2" id="borrow-tab">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Borrow/Return</span>
+                </div>
+                <div class="px-4 py-3 cursor-pointer hover:bg-blue-700 flex items-center space-x-2" id="reports-tab">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports</span>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Header -->
+            <header class="bg-white shadow-sm p-4 flex justify-between items-center">
+                <h2 class="text-xl font-semibold text-gray-800" id="page-title">Dashboard</h2>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="text-sm font-medium">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="p-6">
+                <!-- Dashboard Section -->
+                <div id="dashboard-section">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-500">Total Books</p>
+                                    <h3 class="text-2xl font-bold" id="total-books">0</h3>
+                                </div>
+                                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-book text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-500">Total Users</p>
+                                    <h3 class="text-2xl font-bold" id="total-users">0</h3>
+                                </div>
+                                <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                    <i class="fas fa-users text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-500">Borrowed Books</p>
+                                    <h3 class="text-2xl font-bold" id="borrowed-books">0</h3>
+                                </div>
+                                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                                    <i class="fas fa-exchange-alt text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-500">Overdue Books</p>
+                                    <h3 class="text-2xl font-bold" id="overdue-books">0</h3>
+                                </div>
+                                <div class="p-3 rounded-full bg-red-100 text-red-600">
+                                    <i class="fas fa-exclamation-triangle text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-semibold">Recent Borrowed Books</h3>
+                                <button class="text-blue-600 text-sm">View All</button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full">
+                                    <thead>
+                                        <tr class="text-left text-gray-500 border-b">
+                                            <th class="pb-2">Book</th>
+                                            <th class="pb-2">User</th>
+                                            <th class="pb-2">Borrow Date</th>
+                                            <th class="pb-2">Due Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recent-borrowed">
+                                        <!-- Will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-semibold">Popular Books</h3>
+                                <button class="text-blue-600 text-sm">View All</button>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4" id="popular-books">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Books Management Section -->
+                <div id="books-section" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold">Books Management</h3>
+                        <button id="add-book-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+                            <i class="fas fa-plus"></i>
+                            <span>Add New Book</span>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="p-4 border-b flex justify-between items-center">
+                            <div class="flex space-x-4">
+                                <div class="relative">
+                                    <input type="text" placeholder="Search books..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="book-search">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                                <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="book-filter">
+                                    <option value="all">All Books</option>
+                                    <option value="available">Available</option>
+                                    <option value="borrowed">Borrowed</option>
+                                </select>
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="text-left text-gray-500 border-b">
+                                        <th class="p-4">ID</th>
+                                        <th class="p-4">Title</th>
+                                        <th class="p-4">Author</th>
+                                        <th class="p-4">Publisher</th>
+                                        <th class="p-4">Year</th>
+                                        <th class="p-4">Available</th>
+                                        <th class="p-4">Total</th>
+                                        <th class="p-4">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="books-table-body">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 border-t flex justify-between items-center">
+                            <div class="text-sm text-gray-500">
+                                Showing <span id="book-start">1</span> to <span id="book-end">10</span> of <span id="book-total">0</span> entries
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 border rounded-lg disabled:opacity-50" id="book-prev" disabled>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="px-3 py-1 border rounded-lg disabled:opacity-50" id="book-next" disabled>
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Management Section -->
+                <div id="users-section" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold">Users Management</h3>
+                        <button id="add-user-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+                            <i class="fas fa-plus"></i>
+                            <span>Add New User</span>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="p-4 border-b flex justify-between items-center">
+                            <div class="relative">
+                                <input type="text" placeholder="Search users..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="user-search">
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="text-left text-gray-500 border-b">
+                                        <th class="p-4">ID</th>
+                                        <th class="p-4">Name</th>
+                                        <th class="p-4">Email</th>
+                                        <th class="p-4">Phone</th>
+                                        <th class="p-4">Type</th>
+                                        <th class="p-4">Borrowed</th>
+                                        <th class="p-4">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 border-t flex justify-between items-center">
+                            <div class="text-sm text-gray-500">
+                                Showing <span id="user-start">1</span> to <span id="user-end">10</span> of <span id="user-total">0</span> entries
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 border rounded-lg disabled:opacity-50" id="user-prev" disabled>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="px-3 py-1 border rounded-lg disabled:opacity-50" id="user-next" disabled>
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Borrow/Return Section -->
+                <div id="borrow-section" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold">Borrow/Return Management</h3>
+                        <button id="new-borrow-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>New Borrow</span>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="p-4 border-b">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="relative">
+                                    <input type="text" placeholder="Search borrow slips..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" id="borrow-search">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                                <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" id="borrow-status">
+                                    <option value="all">All Status</option>
+                                    <option value="borrowed">Borrowed</option>
+                                    <option value="returned">Returned</option>
+                                    <option value="overdue">Overdue</option>
+                                </select>
+                                <input type="date" class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" id="borrow-date">
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="text-left text-gray-500 border-b">
+                                        <th class="p-4">Slip ID</th>
+                                        <th class="p-4">User</th>
+                                        <th class="p-4">Book</th>
+                                        <th class="p-4">Borrow Date</th>
+                                        <th class="p-4">Due Date</th>
+                                        <th class="p-4">Return Date</th>
+                                        <th class="p-4">Status</th>
+                                        <th class="p-4">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="borrow-table-body">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 border-t flex justify-between items-center">
+                            <div class="text-sm text-gray-500">
+                                Showing <span id="borrow-start">1</span> to <span id="borrow-end">10</span> of <span id="borrow-total">0</span> entries
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 border rounded-lg disabled:opacity-50" id="borrow-prev" disabled>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="px-3 py-1 border rounded-lg disabled:opacity-50" id="borrow-next" disabled>
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Section -->
+                <div id="reports-section" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold">Reports & Analytics</h3>
+                        <div class="flex space-x-2">
+                            <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="report-period">
+                                <option value="week">This Week</option>
+                                <option value
 </html>
