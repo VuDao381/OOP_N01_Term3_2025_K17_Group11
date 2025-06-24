@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class BorrowSlip {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String bookTitle;
