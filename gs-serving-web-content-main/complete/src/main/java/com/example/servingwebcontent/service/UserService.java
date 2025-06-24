@@ -2,7 +2,6 @@ package com.example.servingwebcontent.service;
 
 import com.example.servingwebcontent.model.User;
 import com.example.servingwebcontent.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,30 +10,43 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    // Lấy tất cả người dùng
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    // Lấy người dùng theo ID
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
+    // Lưu hoặc cập nhật người dùng
     public User saveUser(User user) {
         return userRepository.save(user);
     }
 
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    // Xóa người dùng theo ID
+    public boolean deleteUser(Long id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
-    public User getUserByUsername(String username) {
+    // Tìm theo username
+    public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public User getUserByEmail(String email) {
+    // Tìm theo email
+    public Optional<User> getUserByEmail(String email) {
         return userRepository.findByUseremail(email);
     }
 }

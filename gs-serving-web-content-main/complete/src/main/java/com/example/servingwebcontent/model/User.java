@@ -3,19 +3,23 @@ package com.example.servingwebcontent.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "library_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "username", nullable = false, length = 30)
     private String username;
+
+    @Column(name = "useremail", nullable = false, length = 50, unique = true)
     private String useremail;
+
+    @Column(name = "userpassword", nullable = false, length = 100)
     private String userpassword;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String username, String useremail, String userpassword) {
         this.username = username;

@@ -335,5 +335,57 @@
                         <div class="flex space-x-2">
                             <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="report-period">
                                 <option value="week">This Week</option>
-                                <option value
+                                <option value="month">This Month</option>
+                                <option value="year">This Year</option>
+                            </select>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-download"></i> Generate Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Thêm đoạn này TRƯỚC </body> -->
+<script>
+    const tabs = {
+        "dashboard-tab": "dashboard-section",
+        "books-tab": "books-section",
+        "users-tab": "users-section",
+        "borrow-tab": "borrow-section",
+        "reports-tab": "reports-section"
+    };
+
+    function hideAllSections() {
+        Object.values(tabs).forEach(id => {
+            document.getElementById(id).classList.add("hidden");
+        });
+    }
+
+    function resetActiveTabs() {
+        Object.keys(tabs).forEach(id => {
+            document.getElementById(id).classList.remove("bg-blue-900", "active-tab");
+        });
+    }
+
+    Object.entries(tabs).forEach(([tabId, sectionId]) => {
+        const tab = document.getElementById(tabId);
+        tab.addEventListener("click", () => {
+            hideAllSections();
+            resetActiveTabs();
+            document.getElementById(sectionId).classList.remove("hidden");
+            tab.classList.add("bg-blue-900", "active-tab");
+            const titleMap = {
+                "dashboard-section": "Dashboard",
+                "books-section": "Books Management",
+                "users-section": "Users Management",
+                "borrow-section": "Borrow/Return",
+                "reports-section": "Reports"
+            };
+            document.getElementById("page-title").innerText = titleMap[sectionId];
+        });
+    });
+</script>
+</body>
 </html>

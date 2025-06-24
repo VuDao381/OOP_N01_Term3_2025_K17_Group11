@@ -3,17 +3,26 @@ package com.example.servingwebcontent.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Book")
+@Table(name = "library_book")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "title", nullable = false, length = 50)
     private String title;
+
+    @Column(name = "author", length = 30)
     private String author;
+
+    @Column(name = "publisher", length = 30)
     private String publisher;
+
+    @Column(name = "numPages")
     private int numPages;
+
+    @Column(name = "quantity")
     private int quantity;
 
     public Book() {

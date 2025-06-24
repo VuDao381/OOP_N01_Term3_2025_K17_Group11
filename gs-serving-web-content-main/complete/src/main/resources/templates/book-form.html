@@ -1,0 +1,41 @@
+<!-- templates/book-form.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6 bg-gray-100">
+    <h1 class="text-2xl font-bold mb-4" th:text="${book.id} == null ? 'Add Book' : 'Edit Book'"></h1>
+    <form th:action="@{/books/save}" th:object="${book}" method="post" class="space-y-4 bg-white p-6 rounded shadow">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div>
+            <label class="block mb-1">Title:</label>
+            <input type="text" th:field="*{title}" class="w-full border rounded px-3 py-2"/>
+        </div>
+
+        <div>
+            <label class="block mb-1">Author:</label>
+            <input type="text" th:field="*{author}" class="w-full border rounded px-3 py-2"/>
+        </div>
+
+        <div>
+            <label class="block mb-1">Publisher:</label>
+            <input type="text" th:field="*{publisher}" class="w-full border rounded px-3 py-2"/>
+        </div>
+
+        <div>
+            <label class="block mb-1">Number of Pages:</label>
+            <input type="number" th:field="*{numPages}" class="w-full border rounded px-3 py-2"/>
+        </div>
+
+        <div>
+            <label class="block mb-1">Quantity:</label>
+            <input type="number" th:field="*{quantity}" class="w-full border rounded px-3 py-2"/>
+        </div>
+
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+    </form>
+</body>
+</html>

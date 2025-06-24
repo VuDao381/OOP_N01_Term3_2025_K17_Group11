@@ -1,0 +1,39 @@
+<!-- templates/borrow-slip-list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Borrow Slips</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6 bg-gray-100">
+    <h1 class="text-2xl font-bold mb-4">Borrow Slip List</h1>
+    <a href="/borrow-slips/add" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">New Borrow</a>
+    <table class="table-auto w-full mt-4 bg-white rounded shadow">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">User ID</th>
+                <th class="px-4 py-2">Book</th>
+                <th class="px-4 py-2">Borrow Date</th>
+                <th class="px-4 py-2">Due Date</th>
+                <th class="px-4 py-2">Returned</th>
+                <th class="px-4 py-2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="slip : ${borrowSlips}" class="border-t">
+                <td th:text="${slip.id}" class="px-4 py-2"></td>
+                <td th:text="${slip.userid}" class="px-4 py-2"></td>
+                <td th:text="${slip.bookTitle}" class="px-4 py-2"></td>
+                <td th:text="${slip.borrowDate}" class="px-4 py-2"></td>
+                <td th:text="${slip.dueDate}" class="px-4 py-2"></td>
+                <td th:text="${slip.returned ? 'Yes' : 'No'}" class="px-4 py-2"></td>
+                <td class="px-4 py-2 space-x-2">
+                    <a th:href="@{'/borrow-slips/edit/' + ${slip.id}}" class="text-blue-500 hover:underline">Edit</a>
+                    <a th:href="@{'/borrow-slips/delete/' + ${slip.id}}" class="text-red-500 hover:underline">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
