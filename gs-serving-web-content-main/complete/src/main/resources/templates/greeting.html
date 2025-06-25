@@ -333,10 +333,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="bg-white rounded-lg shadow p-6 space-y-4" id="report-summary">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-gray-500">Total Borrowed</div>
+                            <div class="text-2xl font-bold" id="report-total-borrowed">0</div>
+                        </div>
+                        <div>
+                            <div class="text-gray-500">Returned</div>
+                            <div class="text-2xl font-bold text-green-600" id="report-returned">0</div>
+                        </div>
+                        <div>
+                            <div class="text-gray-500">Overdue</div>
+                            <div class="text-2xl font-bold text-red-600" id="report-overdue">0</div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
-    <!-- Thêm đoạn này TRƯỚC </body> -->
 <script>
     const tabs = {
         "dashboard-tab": "dashboard-section",
@@ -376,5 +391,379 @@
         });
     });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const tableBody = document.getElementById("books-table-body");
+    const bookSearch = document.getElementById("book-search");
+    const bookFilter = document.getElementById("book-filter");
+    const bookStart = document.getElementById("book-start");
+    const bookEnd = document.getElementById("book-end");
+    const bookTotal = document.getElementById("book-total");
+    const prevBtn = document.getElementById("book-prev");
+    const nextBtn = document.getElementById("book-next");
+
+    let books = [];
+    let currentPage = 1;
+    const rowsPerPage = 10;
+
+    // Fetch dữ liệu từ API
+    function fetchBooks() {
+        fetch("/api/books")
+            .then(response => response.json())
+            .then(data => {
+                books = data;
+                renderTable();
+            })
+            .catch(error => console.error("Lỗi khi tải sách:", error));
+    }
+
+    // Render bảng
+    function renderTable() {
+        const keyword = bookSearch.value.toLowerCase();
+        const filter = bookFilter.value;
+
+        // Lọc dữ liệu
+        let filtered = books.filter(book => {
+            const matchKeyword = book.title.toLowerCase().includes(keyword) ||
+                                 book.author.toLowerCase().includes(keyword) ||
+                                 book.publisher.toLowerCase().includes(keyword);
+
+            if (filter === "available") return matchKeyword && book.quantity > 0;
+            if (filter === "borrowed") return matchKeyword && book.quantity === 0;
+            return matchKeyword;
+        });
+
+        // Phân trang
+        const total = filtered.length;
+        const startIdx = (currentPage - 1) * rowsPerPage;
+        const endIdx = Math.min(startIdx + rowsPerPage, total);
+        const currentPageData = filtered.slice(startIdx, endIdx);
+
+        // Hiển thị
+        tableBody.innerHTML = currentPageData.map(book => `
+            <tr class="border-b">
+                <td class="p-4">${book.id}</td>
+                <td class="p-4">${book.title}</td>
+                <td class="p-4">${book.author}</td>
+                <td class="p-4">${book.publisher}</td>
+                <td class="p-4">${book.numPages}</td>
+                <td class="p-4">${book.quantity}</td>
+                <td class="p-4">
+                    <button class="text-blue-600 hover:underline" onclick="editBook(${book.id})">Edit</button>
+                    <button class="text-red-600 hover:underline ml-2" onclick="deleteBook(${book.id})">Delete</button>
+                </td>
+            </tr>
+        `).join("");
+
+        // Cập nhật phân trang
+        bookStart.textContent = total === 0 ? 0 : startIdx + 1;
+        bookEnd.textContent = endIdx;
+        bookTotal.textContent = total;
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = endIdx >= total;
+    }
+
+    // Sự kiện tìm kiếm + filter
+    bookSearch.addEventListener("input", () => {
+        currentPage = 1;
+        renderTable();
+    });
+
+    bookFilter.addEventListener("change", () => {
+        currentPage = 1;
+        renderTable();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+        }
+    });
+
+    nextBtn.addEventListener("click", () => {
+        currentPage++;
+        renderTable();
+    });
+
+    // Placeholder cho Edit/Delete
+    window.editBook = function (id) {
+        alert("Sửa sách ID " + id);
+        // Bạn có thể mở form sửa, hoặc chuyển hướng...
+    };
+
+    window.deleteBook = function (id) {
+        if (confirm("Bạn có chắc muốn xoá sách này?")) {
+            fetch(`/api/books/${id}`, {
+                method: "DELETE"
+            })
+            .then(response => {
+                if (response.ok) {
+                    books = books.filter(b => b.id !== id);
+                    renderTable();
+                } else {
+                    alert("Xoá thất bại!");
+                }
+            });
+        }
+    };
+
+    // Khởi động
+    fetchBooks();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const userTableBody = document.getElementById("users-table-body");
+    const userSearch = document.getElementById("user-search");
+    const userStart = document.getElementById("user-start");
+    const userEnd = document.getElementById("user-end");
+    const userTotal = document.getElementById("user-total");
+    const prevBtn = document.getElementById("user-prev");
+    const nextBtn = document.getElementById("user-next");
+
+    let users = [];
+    let currentPage = 1;
+    const rowsPerPage = 10;
+
+    function fetchUsers() {
+        fetch("/api/users")
+            .then(res => res.json())
+            .then(data => {
+                users = data;
+                renderUserTable();
+            })
+            .catch(err => console.error("Lỗi khi lấy users:", err));
+    }
+
+    function renderUserTable() {
+        const keyword = userSearch.value.toLowerCase();
+        let filtered = users.filter(user =>
+            user.username.toLowerCase().includes(keyword) ||
+            user.useremail.toLowerCase().includes(keyword)
+        );
+
+        const total = filtered.length;
+        const startIdx = (currentPage - 1) * rowsPerPage;
+        const endIdx = Math.min(startIdx + rowsPerPage, total);
+        const currentPageData = filtered.slice(startIdx, endIdx);
+
+        userTableBody.innerHTML = currentPageData.map(user => `
+            <tr class="border-b">
+                <td class="p-4">${user.id}</td>
+                <td class="p-4">${user.username}</td>
+                <td class="p-4">${user.useremail}</td>
+                <td class="p-4 text-gray-400 italic">••••••</td>
+                <td class="p-4">
+                    <button class="text-blue-600 hover:underline" onclick="editUser(${user.id})">Edit</button>
+                    <button class="text-red-600 hover:underline ml-2" onclick="deleteUser(${user.id})">Delete</button>
+                </td>
+            </tr>
+        `).join("");
+
+        userStart.textContent = total === 0 ? 0 : startIdx + 1;
+        userEnd.textContent = endIdx;
+        userTotal.textContent = total;
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = endIdx >= total;
+    }
+
+    userSearch.addEventListener("input", () => {
+        currentPage = 1;
+        renderUserTable();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderUserTable();
+        }
+    });
+
+    nextBtn.addEventListener("click", () => {
+        currentPage++;
+        renderUserTable();
+    });
+
+    window.editUser = function (id) {
+        alert("Sửa user ID " + id);
+        // Chuyển hướng tới form hoặc hiển thị popup
+    };
+
+    window.deleteUser = function (id) {
+        if (confirm("Bạn có chắc muốn xoá người dùng này?")) {
+            fetch(`/api/users/${id}`, {
+                method: "DELETE"
+            }).then(response => {
+                if (response.ok) {
+                    users = users.filter(u => u.id !== id);
+                    renderUserTable();
+                } else {
+                    alert("Xoá thất bại!");
+                }
+            });
+        }
+    };
+
+    fetchUsers();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const tableBody = document.getElementById("borrow-table-body");
+    const searchInput = document.getElementById("borrow-search");
+    const statusFilter = document.getElementById("borrow-status");
+    const dateFilter = document.getElementById("borrow-date");
+    const startSpan = document.getElementById("borrow-start");
+    const endSpan = document.getElementById("borrow-end");
+    const totalSpan = document.getElementById("borrow-total");
+    const prevBtn = document.getElementById("borrow-prev");
+    const nextBtn = document.getElementById("borrow-next");
+
+    let borrowSlips = [];
+    let currentPage = 1;
+    const rowsPerPage = 10;
+
+    function fetchBorrowSlips() {
+        fetch("/api/borrow-slips")
+            .then(res => res.json())
+            .then(data => {
+                borrowSlips = data;
+                renderTable();
+            })
+            .catch(err => console.error("Lỗi khi tải borrow slips:", err));
+    }
+
+    function renderTable() {
+        const keyword = searchInput.value.toLowerCase();
+        const selectedStatus = statusFilter.value;
+        const selectedDate = dateFilter.value;
+
+        let filtered = borrowSlips.filter(slip => {
+            const matchKeyword = slip.user.username.toLowerCase().includes(keyword) ||
+                                 slip.book.title.toLowerCase().includes(keyword);
+
+            let matchStatus = true;
+            if (selectedStatus === "borrowed") matchStatus = !slip.returned;
+            else if (selectedStatus === "returned") matchStatus = slip.returned;
+            else if (selectedStatus === "overdue") {
+                const today = new Date().toISOString().split('T')[0];
+                matchStatus = !slip.returned && slip.dueDate < today;
+            }
+
+            let matchDate = true;
+            if (selectedDate) matchDate = slip.borrowDate === selectedDate;
+
+            return matchKeyword && matchStatus && matchDate;
+        });
+
+        const total = filtered.length;
+        const startIdx = (currentPage - 1) * rowsPerPage;
+        const endIdx = Math.min(startIdx + rowsPerPage, total);
+        const pageData = filtered.slice(startIdx, endIdx);
+
+        tableBody.innerHTML = pageData.map(slip => `
+            <tr class="border-b">
+                <td class="p-4">${slip.id}</td>
+                <td class="p-4">${slip.user.username}</td>
+                <td class="p-4">${slip.book.title}</td>
+                <td class="p-4">${slip.borrowDate}</td>
+                <td class="p-4">${slip.dueDate}</td>
+                <td class="p-4">${slip.returned ? slip.returnDate || "✔" : "-"}</td>
+                <td class="p-4">
+                    ${slip.returned ? `<span class="text-green-600">Returned</span>` :
+                    `<span class="text-yellow-600">${isOverdue(slip.dueDate) ? "Overdue" : "Borrowed"}</span>`}
+                </td>
+                <td class="p-4">
+                    ${slip.returned ? '' :
+                    `<button class="text-blue-600 hover:underline" onclick="returnBook(${slip.id})">Return</button>`}
+                </td>
+            </tr>
+        `).join("");
+
+        startSpan.textContent = total === 0 ? 0 : startIdx + 1;
+        endSpan.textContent = endIdx;
+        totalSpan.textContent = total;
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = endIdx >= total;
+    }
+
+    function isOverdue(dueDate) {
+        const today = new Date().toISOString().split('T')[0];
+        return dueDate < today;
+    }
+
+    searchInput.addEventListener("input", () => {
+        currentPage = 1;
+        renderTable();
+    });
+
+    statusFilter.addEventListener("change", () => {
+        currentPage = 1;
+        renderTable();
+    });
+
+    dateFilter.addEventListener("input", () => {
+        currentPage = 1;
+        renderTable();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+        }
+    });
+
+    nextBtn.addEventListener("click", () => {
+        currentPage++;
+        renderTable();
+    });
+
+    window.returnBook = function (id) {
+        if (confirm("Xác nhận đã trả sách?")) {
+            fetch(`/api/borrow-slips/${id}/return`, {
+                method: "PUT"
+            }).then(res => {
+                if (res.ok) {
+                    const slip = borrowSlips.find(s => s.id === id);
+                    if (slip) slip.returned = true;
+                    renderTable();
+                } else {
+                    alert("Trả sách thất bại!");
+                }
+            });
+        }
+    };
+
+    fetchBorrowSlips();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const periodSelect = document.getElementById("report-period");
+    const totalBorrowed = document.getElementById("report-total-borrowed");
+    const totalReturned = document.getElementById("report-returned");
+    const totalOverdue = document.getElementById("report-overdue");
+
+    function fetchReport() {
+        const period = periodSelect.value;
+
+        fetch(`/api/reports?period=${period}`)
+            .then(res => res.json())
+            .then(data => {
+                totalBorrowed.textContent = data.totalBorrowed;
+                totalReturned.textContent = data.totalReturned;
+                totalOverdue.textContent = data.totalOverdue;
+            })
+            .catch(err => console.error("Lỗi khi tải báo cáo:", err));
+    }
+
+    periodSelect.addEventListener("change", fetchReport);
+
+    fetchReport(); // Load mặc định khi vào trang
+});
+</script>
+
 </body>
 </html>
