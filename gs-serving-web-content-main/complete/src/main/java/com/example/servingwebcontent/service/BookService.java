@@ -55,8 +55,12 @@ public class BookService {
         return bookRepository.findByPublisher(publisher);
     }
 
-    // Tìm sách chứa từ khoá trong tiêu đề (gợi ý tìm kiếm)
-    public List<Book> searchBooksByTitle(String keyword) {
-        return bookRepository.findByTitleContainingIgnoreCase(keyword);
+    // Tìm sách theo keyword
+    public List<Book> globalSearch(String keyword) {
+    List<Book> results = bookRepository.findByTitleContainingIgnoreCase(keyword);
+    results.addAll(bookRepository.findByAuthorContainingIgnoreCase(keyword));
+    results.addAll(bookRepository.findByPublisherContainingIgnoreCase(keyword));
+    return results;
     }
 }
+

@@ -2,12 +2,15 @@ package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.model.Book;
 import com.example.servingwebcontent.service.BookService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/books")
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/books")
+@CrossOrigin(origins = "*") // Cho phép frontend truy cập (CORS)
 public class BookController {
 
     private final BookService bookService;
@@ -16,40 +19,44 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    // Hiển thị danh sách sách
+    // GET: /api/books - Lấy danh sách tất cả sách
     @GetMapping
-    public String listBooks(Model model) {
-        model.addAttribute("books", bookService.getAllBooks());
-        return "book-list"; // templates/book-list.html
+    public List<Book> getAllBooks() {
+        return bookService.getAllBooks();
     }
 
-    // Hiển thị form thêm sách
-    @GetMapping("/add")
-    public String showAddForm(Model model) {
-        model.addAttribute("book", new Book());
-        return "book-form"; // templates/book-form.html
+    // GET: /api/books/{id} - Lấy thông tin 1 sách theo ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
+        Optional<Book> book = bookService.getBookById(id);
+        return book.map(ResponseEntity::ok)
+                   .orElse(ResponseEntity.notFound().build());
     }
 
-    // Lưu sách (thêm hoặc cập nhật)
-    @PostMapping("/save")
-    public String saveBook(@ModelAttribute("book") Book book) {
-        bookService.saveBook(book);
-        return "redirect:/books";
+    // POST: /api/books - Tạo mới sách
+    @PostMapping
+    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+        Book created = bookService.saveBook(book);
+        return ResponseEntity.ok(created);
     }
 
-    // Hiển thị form chỉnh sửa sách
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") Long id, Model model) {
-        return bookService.getBookById(id).map(book -> {
-            model.addAttribute("book", book);
-            return "book-form";
-        }).orElse("redirect:/books");
+    // PUT: /api/books/{id} - Cập nhật thông tin sách
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
+        return bookService.getBookById(id)
+                .map(existingBook -> {
+                    updatedBook.setId(id); // Đảm bảo ID đúng
+                    Book savedBook = bookService.saveBook(updatedBook);
+                    return ResponseEntity.ok(savedBook);
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    // Xoá sách
-    @GetMapping("/delete/{id}")
-    public String deleteBook(@PathVariable("id") Long id) {
-        bookService.deleteBook(id);
-        return "redirect:/books";
+    // DELETE: /api/books/{id} - Xoá sách theo ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+        boolean deleted = bookService.deleteBook(id);
+        return deleted ? ResponseEntity.noContent().build()
+                       : ResponseEntity.notFound().build();
     }
 }
