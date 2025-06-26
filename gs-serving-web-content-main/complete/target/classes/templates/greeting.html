@@ -203,6 +203,41 @@
                         </div>
                     </div>
                 </div>
+                <!-- Add Book Modal -->
+                <div id="add-book-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+                    <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative">
+                        <h2 class="text-lg font-semibold mb-4">Add New Book</h2>
+                        <form id="add-book-form" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Title</label>
+                                <input type="text" name="title" required class="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Author</label>
+                                <input type="text" name="author" required class="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Publisher</label>
+                                <input type="text" name="publisher" required class="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Pages</label>
+                                <input type="number" name="numPages" min="1" required class="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Quantity</label>
+                                <input type="number" name="quantity" min="1" required class="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="flex justify-end space-x-2 pt-4">
+                                <button type="button" id="cancel-add-book" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+                                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Save</button>
+                            </div>
+                        </form>
+                        <button id="close-modal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
 
                 <!-- Users Management Section -->
                 <div id="users-section" class="hidden">
@@ -291,7 +326,6 @@
                                         <th class="p-4">Book</th>
                                         <th class="p-4">Borrow Date</th>
                                         <th class="p-4">Due Date</th>
-                                        <th class="p-4">Return Date</th>
                                         <th class="p-4">Status</th>
                                         <th class="p-4">Actions</th>
                                     </tr>
@@ -402,6 +436,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevBtn = document.getElementById("book-prev");
     const nextBtn = document.getElementById("book-next");
 
+    const addBookBtn = document.getElementById("add-book-btn");
+    const addBookModal = document.getElementById("add-book-modal");
+    const cancelAddBook = document.getElementById("cancel-add-book");
+    const closeModal = document.getElementById("close-modal");
+    const addBookForm = document.getElementById("add-book-form");
+
     let books = [];
     let currentPage = 1;
     const rowsPerPage = 10;
@@ -422,7 +462,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const keyword = bookSearch.value.toLowerCase();
         const filter = bookFilter.value;
 
-        // Lọc dữ liệu
         let filtered = books.filter(book => {
             const matchKeyword = book.title.toLowerCase().includes(keyword) ||
                                  book.author.toLowerCase().includes(keyword) ||
@@ -433,13 +472,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return matchKeyword;
         });
 
-        // Phân trang
         const total = filtered.length;
         const startIdx = (currentPage - 1) * rowsPerPage;
         const endIdx = Math.min(startIdx + rowsPerPage, total);
         const currentPageData = filtered.slice(startIdx, endIdx);
 
-        // Hiển thị
         tableBody.innerHTML = currentPageData.map(book => `
             <tr class="border-b">
                 <td class="p-4">${book.id}</td>
@@ -455,7 +492,6 @@ document.addEventListener("DOMContentLoaded", function () {
             </tr>
         `).join("");
 
-        // Cập nhật phân trang
         bookStart.textContent = total === 0 ? 0 : startIdx + 1;
         bookEnd.textContent = endIdx;
         bookTotal.textContent = total;
@@ -463,7 +499,6 @@ document.addEventListener("DOMContentLoaded", function () {
         nextBtn.disabled = endIdx >= total;
     }
 
-    // Sự kiện tìm kiếm + filter
     bookSearch.addEventListener("input", () => {
         currentPage = 1;
         renderTable();
@@ -486,10 +521,9 @@ document.addEventListener("DOMContentLoaded", function () {
         renderTable();
     });
 
-    // Placeholder cho Edit/Delete
+    // Edit/Delete (placeholder)
     window.editBook = function (id) {
         alert("Sửa sách ID " + id);
-        // Bạn có thể mở form sửa, hoặc chuyển hướng...
     };
 
     window.deleteBook = function (id) {
@@ -508,7 +542,60 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // Khởi động
+    // ----------------------------
+    // Xử lý thêm sách mới
+    // ----------------------------
+
+    addBookBtn.addEventListener("click", () => {
+        addBookModal.classList.remove("hidden");
+        addBookModal.classList.add("flex");
+    });
+
+    cancelAddBook.addEventListener("click", () => {
+        addBookModal.classList.add("hidden");
+        addBookForm.reset();
+    });
+
+    closeModal.addEventListener("click", () => {
+        addBookModal.classList.add("hidden");
+        addBookForm.reset();
+    });
+
+    addBookForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(addBookForm);
+        const newBook = {
+            title: formData.get("title"),
+            author: formData.get("author"),
+            publisher: formData.get("publisher"),
+            numPages: parseInt(formData.get("numPages")),
+            quantity: parseInt(formData.get("quantity"))
+        };
+
+        fetch("/api/books", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newBook)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Không thể thêm sách.");
+            }
+            return response.json();
+        })
+        .then(addedBook => {
+            books.push(addedBook);
+            addBookModal.classList.add("hidden");
+            addBookForm.reset();
+            renderTable();
+        })
+        .catch(error => {
+            alert("Thêm sách thất bại: " + error.message);
+        });
+    });
+
+    // Bắt đầu
     fetchBooks();
 });
 </script>
