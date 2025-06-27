@@ -62,5 +62,10 @@ public class BookService {
     results.addAll(bookRepository.findByPublisherContainingIgnoreCase(keyword));
     return results;
     }
+
+    public long countBooks() {
+    return bookRepository.count();
+}
+
 }
 

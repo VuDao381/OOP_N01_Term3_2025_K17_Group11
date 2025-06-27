@@ -6,6 +6,8 @@ import com.example.servingwebcontent.model.User;
 import com.example.servingwebcontent.repository.BorrowSlipRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,48 +15,69 @@ import java.util.Optional;
 public class BorrowSlipService {
 
     private final BorrowSlipRepository borrowSlipRepository;
+    private final BookService bookService;
 
-
-    public BorrowSlipService(BorrowSlipRepository borrowSlipRepository) {
+    public BorrowSlipService(BorrowSlipRepository borrowSlipRepository, BookService bookService) {
         this.borrowSlipRepository = borrowSlipRepository;
+        this.bookService = bookService;
     }
 
-    // Lấy tất cả phiếu mượn
     public List<BorrowSlip> getAllBorrowSlips() {
         return borrowSlipRepository.findAll();
     }
 
-    // Lấy phiếu mượn theo ID
     public Optional<BorrowSlip> getBorrowSlipById(Long id) {
         return borrowSlipRepository.findById(id);
     }
 
-    // Lấy phiếu mượn theo người dùng
     public List<BorrowSlip> getBorrowSlipsByUser(User user) {
         return borrowSlipRepository.findByUser(user);
     }
 
-    // Lấy phiếu mượn theo sách
     public List<BorrowSlip> getBorrowSlipsByBook(Book book) {
         return borrowSlipRepository.findByBook(book);
     }
 
-    // Lấy danh sách đã hoặc chưa trả
     public List<BorrowSlip> getBorrowSlipsByReturnedStatus(boolean isReturned) {
         return borrowSlipRepository.findByIsReturned(isReturned);
     }
 
-    // Thêm hoặc cập nhật phiếu mượn
     public BorrowSlip saveBorrowSlip(BorrowSlip borrowSlip) {
         return borrowSlipRepository.save(borrowSlip);
     }
 
-    // Xoá phiếu mượn
     public boolean deleteBorrowSlip(Long id) {
         if (borrowSlipRepository.existsById(id)) {
             borrowSlipRepository.deleteById(id);
             return true;
         }
         return false;
+    }
+
+    public long countCurrentlyBorrowedBooks() {
+        return borrowSlipRepository.countByIsReturned(false);
+    }
+
+    public long countOverdueBooks() {
+        return borrowSlipRepository.countByIsReturnedFalseAndDueDateBefore(LocalDate.now());
+    }
+
+    public List<BorrowSlip> getRecentBorrowSlips(int limit) {
+        return borrowSlipRepository.findTop5ByOrderByBorrowDateDesc();
+    }
+
+    public List<Book> getPopularBooks(int limit) {
+        List<Object[]> results = borrowSlipRepository.findTopBorrowedBooks();
+        List<Book> topBooks = new ArrayList<>();
+        int count = 0;
+
+        for (Object[] row : results) {
+            Long bookId = (Long) row[0];
+            Optional<Book> bookOpt = bookService.getBookById(bookId);
+            bookOpt.ifPresent(topBooks::add);
+            if (++count >= limit) break;
+        }
+
+        return topBooks;
     }
 }

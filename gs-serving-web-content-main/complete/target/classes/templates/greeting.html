@@ -203,11 +203,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- Add Book Modal -->
+                <!-- Add/Edit Book Modal -->
                 <div id="add-book-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
                     <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative">
-                        <h2 class="text-lg font-semibold mb-4">Add New Book</h2>
+                        <h2 id="modal-title" class="text-lg font-semibold mb-4">Add New Book</h2>
                         <form id="add-book-form" class="space-y-4">
+                            <input type="hidden" name="bookId" id="book-id">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Title</label>
                                 <input type="text" name="title" required class="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -238,6 +239,7 @@
                         </button>
                     </div>
                 </div>
+
 
                 <!-- Users Management Section -->
                 <div id="users-section" class="hidden">
@@ -427,6 +429,56 @@
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    const totalBooksEl = document.getElementById("total-books");
+    const totalUsersEl = document.getElementById("total-users");
+    const borrowedBooksEl = document.getElementById("borrowed-books");
+    const overdueBooksEl = document.getElementById("overdue-books");
+    const recentBorrowedEl = document.getElementById("recent-borrowed");
+    const popularBooksEl = document.getElementById("popular-books");
+
+    // 1. Thống kê tổng quan
+    fetch("/api/dashboard/stats")
+        .then(res => res.json())
+        .then(data => {
+            totalBooksEl.textContent = data.totalBooks;
+            totalUsersEl.textContent = data.totalUsers;
+            borrowedBooksEl.textContent = data.borrowedBooks;
+            overdueBooksEl.textContent = data.overdueBooks;
+        })
+        .catch(err => console.error("Lỗi khi tải thống kê:", err));
+
+    // 2. Danh sách mượn gần đây
+    fetch("/api/borrows/recent")
+        .then(res => res.json())
+        .then(data => {
+            recentBorrowedEl.innerHTML = data.map(item => `
+                <tr class="border-b">
+                    <td class="py-2">${item.bookTitle}</td>
+                    <td class="py-2">${item.userName}</td>
+                    <td class="py-2">${item.borrowDate}</td>
+                    <td class="py-2">${item.dueDate}</td>
+                </tr>
+            `).join("");
+        })
+        .catch(err => console.error("Lỗi khi tải danh sách mượn gần đây:", err));
+
+    // 3. Top sách được mượn nhiều
+    fetch("/api/books/popular")
+        .then(res => res.json())
+        .then(data => {
+            popularBooksEl.innerHTML = data.map(book => `
+                <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="font-semibold text-sm">${book.title}</div>
+                    <div class="text-gray-500 text-xs">${book.author}</div>
+                </div>
+            `).join("");
+        })
+        .catch(err => console.error("Lỗi khi tải sách phổ biến:", err));
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.getElementById("books-table-body");
     const bookSearch = document.getElementById("book-search");
     const bookFilter = document.getElementById("book-filter");
@@ -441,12 +493,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const cancelAddBook = document.getElementById("cancel-add-book");
     const closeModal = document.getElementById("close-modal");
     const addBookForm = document.getElementById("add-book-form");
+    const bookIdInput = document.getElementById("book-id");
+    const modalTitle = document.getElementById("modal-title");
 
     let books = [];
     let currentPage = 1;
     const rowsPerPage = 10;
+    let editingBookId = null;
 
-    // Fetch dữ liệu từ API
     function fetchBooks() {
         fetch("/api/books")
             .then(response => response.json())
@@ -457,15 +511,14 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("Lỗi khi tải sách:", error));
     }
 
-    // Render bảng
     function renderTable() {
         const keyword = bookSearch.value.toLowerCase();
         const filter = bookFilter.value;
 
         let filtered = books.filter(book => {
             const matchKeyword = book.title.toLowerCase().includes(keyword) ||
-                                 book.author.toLowerCase().includes(keyword) ||
-                                 book.publisher.toLowerCase().includes(keyword);
+                book.author.toLowerCase().includes(keyword) ||
+                book.publisher.toLowerCase().includes(keyword);
 
             if (filter === "available") return matchKeyword && book.quantity > 0;
             if (filter === "borrowed") return matchKeyword && book.quantity === 0;
@@ -521,9 +574,22 @@ document.addEventListener("DOMContentLoaded", function () {
         renderTable();
     });
 
-    // Edit/Delete (placeholder)
     window.editBook = function (id) {
-        alert("Sửa sách ID " + id);
+        const book = books.find(b => b.id === id);
+        if (!book) return;
+
+        editingBookId = id;
+
+        addBookForm.title.value = book.title;
+        addBookForm.author.value = book.author;
+        addBookForm.publisher.value = book.publisher;
+        addBookForm.numPages.value = book.numPages;
+        addBookForm.quantity.value = book.quantity;
+        bookIdInput.value = id;
+        modalTitle.textContent = "Edit Book";
+
+        addBookModal.classList.remove("hidden");
+        addBookModal.classList.add("flex");
     };
 
     window.deleteBook = function (id) {
@@ -531,22 +597,21 @@ document.addEventListener("DOMContentLoaded", function () {
             fetch(`/api/books/${id}`, {
                 method: "DELETE"
             })
-            .then(response => {
-                if (response.ok) {
-                    books = books.filter(b => b.id !== id);
-                    renderTable();
-                } else {
-                    alert("Xoá thất bại!");
-                }
-            });
+                .then(response => {
+                    if (response.ok) {
+                        books = books.filter(b => b.id !== id);
+                        renderTable();
+                    } else {
+                        alert("Xoá thất bại!");
+                    }
+                });
         }
     };
 
-    // ----------------------------
-    // Xử lý thêm sách mới
-    // ----------------------------
-
     addBookBtn.addEventListener("click", () => {
+        editingBookId = null;
+        modalTitle.textContent = "Add New Book";
+        addBookForm.reset();
         addBookModal.classList.remove("hidden");
         addBookModal.classList.add("flex");
     });
@@ -554,18 +619,20 @@ document.addEventListener("DOMContentLoaded", function () {
     cancelAddBook.addEventListener("click", () => {
         addBookModal.classList.add("hidden");
         addBookForm.reset();
+        editingBookId = null;
     });
 
     closeModal.addEventListener("click", () => {
         addBookModal.classList.add("hidden");
         addBookForm.reset();
+        editingBookId = null;
     });
 
     addBookForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
         const formData = new FormData(addBookForm);
-        const newBook = {
+        const bookData = {
             title: formData.get("title"),
             author: formData.get("author"),
             publisher: formData.get("publisher"),
@@ -573,32 +640,42 @@ document.addEventListener("DOMContentLoaded", function () {
             quantity: parseInt(formData.get("quantity"))
         };
 
-        fetch("/api/books", {
-            method: "POST",
+        const method = editingBookId ? "PUT" : "POST";
+        const url = editingBookId ? `/api/books/${editingBookId}` : "/api/books";
+
+        fetch(url, {
+            method: method,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newBook)
+            body: JSON.stringify(bookData)
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error("Không thể thêm sách.");
+                throw new Error(editingBookId ? "Không thể cập nhật sách." : "Không thể thêm sách.");
             }
             return response.json();
         })
-        .then(addedBook => {
-            books.push(addedBook);
-            addBookModal.classList.add("hidden");
+        .then(savedBook => {
+            if (editingBookId) {
+                const index = books.findIndex(b => b.id === editingBookId);
+                books[index] = savedBook;
+            } else {
+                books.push(savedBook);
+            }
+
             addBookForm.reset();
+            addBookModal.classList.add("hidden");
+            editingBookId = null;
             renderTable();
         })
         .catch(error => {
-            alert("Thêm sách thất bại: " + error.message);
+            alert(error.message);
         });
     });
 
-    // Bắt đầu
     fetchBooks();
 });
 </script>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const userTableBody = document.getElementById("users-table-body");
