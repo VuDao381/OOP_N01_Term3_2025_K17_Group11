@@ -520,7 +520,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(err => console.error("Lỗi khi tải danh sách mượn gần đây:", err));
 
     // 3. Top sách được mượn nhiều
-    fetch("/api/books/popular")
+    fetch("/api/borrow-slips/popular")
         .then(res => res.json())
         .then(data => {
             popularBooksEl.innerHTML = data.map(book => `
