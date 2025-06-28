@@ -45,10 +45,6 @@
             <header class="bg-white shadow-sm p-4 flex justify-between items-center">
                 <h2 class="text-xl font-semibold text-gray-800" id="page-title">Dashboard</h2>
                 <div class="flex items-center space-x-4">
-                    <div class="relative">
-                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                    </div>
                     <div class="flex items-center space-x-2">
                         <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
                             <i class="fas fa-user"></i>
@@ -113,7 +109,6 @@
                         <div class="bg-white p-6 rounded-lg shadow">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="font-semibold">Recent Borrowed Books</h3>
-                                <button class="text-blue-600 text-sm">View All</button>
                             </div>
                             <div class="overflow-x-auto">
                                 <table class="min-w-full">
@@ -134,7 +129,6 @@
                         <div class="bg-white p-6 rounded-lg shadow">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="font-semibold">Popular Books</h3>
-                                <button class="text-blue-600 text-sm">View All</button>
                             </div>
                             <div class="grid grid-cols-2 gap-4" id="popular-books">
                                 <!-- Will be populated by JavaScript -->
@@ -162,13 +156,10 @@
                                 </div>
                                 <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="book-filter">
                                     <option value="all">All Books</option>
-                                    <option value="available">Available</option>
-                                    <option value="borrowed">Borrowed</option>
+                                    <option value="a-to-z">A-Z</option>
+                                    <option value="z-to-a">Z-A</option>
                                 </select>
                             </div>
-                            <button class="text-blue-600 hover:text-blue-800">
-                                <i class="fas fa-download"></i> Export
-                            </button>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="min-w-full">
@@ -257,9 +248,6 @@
                                 <input type="text" placeholder="Search users..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="user-search">
                                 <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                             </div>
-                            <button class="text-blue-600 hover:text-blue-800">
-                                <i class="fas fa-download"></i> Export
-                            </button>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="min-w-full">
@@ -378,67 +366,62 @@
                     </div>
                 </div>
                 <!-- Borrow Slip Modal -->
-            <div id="borrow-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-                <div class="bg-white p-6 rounded-lg w-full max-w-xl relative">
-                    <button id="close-borrow-modal" class="absolute top-2 right-2 text-gray-600 hover:text-red-600">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <h3 class="text-xl font-semibold mb-4" id="borrow-modal-title">New Borrow Slip</h3>
-                    <form id="borrow-form" class="space-y-4">
-                        <input type="hidden" id="borrow-id" name="id">
-                        <div>
-                            <label for="borrow-user-id" class="block font-medium">User ID</label>
-                            <input type="number" id="borrow-user-id" name="userId" class="w-full border px-4 py-2 rounded" required>
-                        </div>
-                        <div>
-                            <label for="borrow-book-id" class="block font-medium">Book ID</label>
-                            <input type="number" id="borrow-book-id" name="bookId" class="w-full border px-4 py-2 rounded" required>
-                        </div>
-                        <div>
-                            <label for="borrow-date-input" class="block font-medium">Borrow Date</label>
-                            <input type="date" id="borrow-date-input" name="borrowDate" class="w-full border px-4 py-2 rounded" required>
-                        </div>
-                        <div>
-                            <label for="due-date-input" class="block font-medium">Due Date</label>
-                            <input type="date" id="due-date-input" name="dueDate" class="w-full border px-4 py-2 rounded" required>
-                        </div>
-                        <div class="flex justify-end space-x-2">
-                            <button type="button" id="cancel-borrow" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
-                            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
-                        </div>
-                    </form>
+                <div id="borrow-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                    <div class="bg-white p-6 rounded-lg w-full max-w-xl relative">
+                        <button id="close-borrow-modal" class="absolute top-2 right-2 text-gray-600 hover:text-red-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <h3 class="text-xl font-semibold mb-4" id="borrow-modal-title">New Borrow Slip</h3>
+                        <form id="borrow-form" class="space-y-4">
+                            <input type="hidden" id="borrow-id" name="id">
+                            <div>
+                                <label for="borrow-user-id" class="block font-medium">User ID</label>
+                                <input type="number" id="borrow-user-id" name="userId" class="w-full border px-4 py-2 rounded" required>
+                            </div>
+                            <div>
+                                <label for="borrow-book-id" class="block font-medium">Book ID</label>
+                                <input type="number" id="borrow-book-id" name="bookId" class="w-full border px-4 py-2 rounded" required>
+                            </div>
+                            <div>
+                                <label for="borrow-date-input" class="block font-medium">Borrow Date</label>
+                                <input type="date" id="borrow-date-input" name="borrowDate" class="w-full border px-4 py-2 rounded" required>
+                            </div>
+                            <div>
+                                <label for="due-date-input" class="block font-medium">Due Date</label>
+                                <input type="date" id="due-date-input" name="dueDate" class="w-full border px-4 py-2 rounded" required>
+                            </div>
+                            <div class="flex justify-end space-x-2">
+                                <button type="button" id="cancel-borrow" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
+                                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
 
                 <!-- Reports Section -->
                 <div id="reports-section" class="hidden">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-xl font-semibold">Reports & Analytics</h3>
-                        <div class="flex space-x-2">
-                            <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" id="report-period">
-                                <option value="week">This Week</option>
-                                <option value="month">This Month</option>
-                                <option value="year">This Year</option>
-                            </select>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                                <i class="fas fa-download"></i> Generate Report
-                            </button>
-                        </div>
+                        <select class="border rounded-lg px-4 py-2" id="report-period">
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
                     </div>
-                </div>
-                <div class="bg-white rounded-lg shadow p-6 space-y-4" id="report-summary">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                        <div>
-                            <div class="text-gray-500">Total Borrowed</div>
-                            <div class="text-2xl font-bold" id="report-total-borrowed">0</div>
-                        </div>
-                        <div>
-                            <div class="text-gray-500">Returned</div>
-                            <div class="text-2xl font-bold text-green-600" id="report-returned">0</div>
-                        </div>
-                        <div>
-                            <div class="text-gray-500">Overdue</div>
-                            <div class="text-2xl font-bold text-red-600" id="report-overdue">0</div>
+                    <div class="bg-white rounded-lg shadow p-6 space-y-4" id="report-summary">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                            <div>
+                                <div class="text-gray-500">Total Borrowed</div>
+                                <div class="text-2xl font-bold" id="report-total-borrowed">0</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-500">Returned</div>
+                                <div class="text-2xl font-bold text-green-600" id="report-returned">0</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-500">Overdue</div>
+                                <div class="text-2xl font-bold text-red-600" id="report-overdue">0</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -576,11 +559,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const matchKeyword = book.title.toLowerCase().includes(keyword) ||
                 book.author.toLowerCase().includes(keyword) ||
                 book.publisher.toLowerCase().includes(keyword);
-
-            if (filter === "available") return matchKeyword && book.quantity > 0;
-            if (filter === "borrowed") return matchKeyword && book.quantity === 0;
             return matchKeyword;
         });
+        if (filter === "a-to-z") {
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+        } else if (filter === "z-to-a") {
+        filtered.sort((a, b) => b.title.localeCompare(a.title));
+        }
 
         const total = filtered.length;
         const startIdx = (currentPage - 1) * rowsPerPage;
