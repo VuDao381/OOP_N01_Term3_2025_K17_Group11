@@ -30,6 +30,8 @@ public class BorrowSlip {
     @Column(name = "is_return")
     private boolean isReturned;
 
+    private LocalDate returnDate;
+
     public BorrowSlip() {}
 
     public BorrowSlip(User user, Book book, LocalDate borrowDate, LocalDate dueDate) {
