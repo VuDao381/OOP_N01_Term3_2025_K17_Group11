@@ -1,19 +1,30 @@
 package com.example.servingwebcontent.controller;
 
-import com.example.servingwebcontent.model.BorrowSlip;
-import com.example.servingwebcontent.model.Book;
-import com.example.servingwebcontent.model.User;
-import com.example.servingwebcontent.service.BorrowSlipService;
-import com.example.servingwebcontent.service.BookService;
-import com.example.servingwebcontent.service.UserService;
-import com.example.servingwebcontent.dto.BorrowSlipDTO;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import com.example.servingwebcontent.dto.BorrowSlipDTO;
+import com.example.servingwebcontent.model.Book;
+import com.example.servingwebcontent.model.BorrowSlip;
+import com.example.servingwebcontent.model.User;
+import com.example.servingwebcontent.service.BookService;
+import com.example.servingwebcontent.service.BorrowSlipService;
+import com.example.servingwebcontent.service.UserService;
 
 @RestController
 @RequestMapping("/api/borrow-slips")
@@ -128,5 +139,23 @@ public class BorrowSlipController {
         }
 
         return result;
+    }
+    @PutMapping("/{id}/return")
+public ResponseEntity<?> markAsReturned(@PathVariable Long id) {
+    Optional<BorrowSlip> optional = borrowSlipService.getBorrowSlipById(id);
+    if (optional.isEmpty()) {
+        return ResponseEntity.notFound().build(); // 404 nếu không tìm thấy
+    }
+
+    BorrowSlip slip = optional.get();
+    if (slip.isReturned()) {
+        return ResponseEntity.badRequest().body("Phiếu mượn này đã được trả trước đó.");
+    }
+
+    slip.setReturned(true);
+    slip.setreturnDate(LocalDate.now()); // ngày trả hiện tại
+    borrowSlipService.saveBorrowSlip(slip); // lưu lại vào DB
+
+    return ResponseEntity.ok("Đã đánh dấu là đã trả.");
     }
 }

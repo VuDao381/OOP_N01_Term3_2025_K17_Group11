@@ -859,7 +859,6 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchUsers();
 });
 </script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.getElementById("borrow-table-body");
@@ -890,6 +889,11 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(err => console.error("Lỗi khi tải borrow slips:", err));
     }
 
+    function isOverdue(dueDate) {
+        const today = new Date().toISOString().split('T')[0];
+        return dueDate < today;
+    }
+
     function renderTable() {
         const keyword = searchInput.value.toLowerCase();
         const selectedStatus = statusFilter.value;
@@ -918,24 +922,32 @@ document.addEventListener("DOMContentLoaded", function () {
         const endIdx = Math.min(startIdx + rowsPerPage, total);
         const pageData = filtered.slice(startIdx, endIdx);
 
-        tableBody.innerHTML = pageData.map(slip => `
-            <tr class="border-b">
-                <td class="p-4">${slip.id}</td>
-                <td class="p-4">${slip.user.username}</td>
-                <td class="p-4">${slip.book.title}</td>
-                <td class="p-4">${slip.borrowDate}</td>
-                <td class="p-4">${slip.dueDate}</td>
-                <td class="p-4">${slip.returned ? slip.returnDate || "✔" : "-"}</td>
-                <td class="p-4">
-                    ${slip.returned ? `<span class="text-green-600">Returned</span>` :
-                    `<span class="text-yellow-600">${isOverdue(slip.dueDate) ? "Overdue" : "Borrowed"}</span>`}
-                </td>
-                <td class="p-4 space-x-2">
-                    <button class="text-blue-600 hover:underline" onclick="editBorrowSlip(${slip.id})">Edit</button>
-                    <button class="text-red-600 hover:underline" onclick="deleteBorrowSlip(${slip.id})">Delete</button>
-                </td>
-            </tr>
-        `).join("");
+        tableBody.innerHTML = pageData.map(slip => {
+            let statusHTML = "";
+            if (slip.returned) {
+                statusHTML = `<span class="text-green-600"><i class="fas fa-check-circle mr-1"></i>Returned</span>`;
+            } else if (isOverdue(slip.dueDate)) {
+                statusHTML = `<span class="text-red-600"><i class="fas fa-exclamation-circle mr-1"></i>Overdue</span>`;
+            } else {
+                statusHTML = `<span class="text-yellow-600"><i class="fas fa-clock mr-1"></i>Borrowed</span>`;
+            }
+
+            return `
+                <tr class="border-b">
+                    <td class="p-4">${slip.id}</td>
+                    <td class="p-4">${slip.user.username}</td>
+                    <td class="p-4">${slip.book.title}</td>
+                    <td class="p-4">${slip.borrowDate}</td>
+                    <td class="p-4">${slip.dueDate}</td>
+                    <td class="p-4">${statusHTML}</td>
+                    <td class="p-4 space-x-2">
+                        <button class="text-blue-600 hover:underline" onclick="editBorrowSlip(${slip.id})">Edit</button>
+                        <button class="text-red-600 hover:underline" onclick="deleteBorrowSlip(${slip.id})">Delete</button>
+                        ${!slip.returned ? `<button class="text-green-600 hover:underline" onclick="returnBook(${slip.id})">Mark Returned</button>` : ""}
+                    </td>
+                </tr>
+            `;
+        }).join("");
 
         startSpan.textContent = total === 0 ? 0 : startIdx + 1;
         endSpan.textContent = endIdx;
@@ -944,12 +956,7 @@ document.addEventListener("DOMContentLoaded", function () {
         nextBtn.disabled = endIdx >= total;
     }
 
-    function isOverdue(dueDate) {
-        const today = new Date().toISOString().split('T')[0];
-        return dueDate < today;
-    }
-
-    // --- Event listeners ---
+    // Event listeners
     searchInput.addEventListener("input", () => {
         currentPage = 1;
         renderTable();
@@ -977,14 +984,17 @@ document.addEventListener("DOMContentLoaded", function () {
         renderTable();
     });
 
-    // --- Return book ---
+    // Return book
     window.returnBook = function (id) {
         if (confirm("Xác nhận đã trả sách?")) {
             fetch(`/api/borrow-slips/${id}/return`, { method: "PUT" })
                 .then(res => {
                     if (res.ok) {
                         const slip = borrowSlips.find(s => s.id === id);
-                        if (slip) slip.returned = true;
+                        if (slip) {
+                            slip.returned = true;
+                            slip.returnDate = new Date().toISOString().split('T')[0];
+                        }
                         renderTable();
                     } else {
                         alert("Trả sách thất bại!");
@@ -993,7 +1003,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // --- Edit borrow slip ---
+    // Edit
     window.editBorrowSlip = function (id) {
         const slip = borrowSlips.find(s => s.id === id);
         if (!slip) return;
@@ -1008,7 +1018,7 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.classList.remove("hidden");
     };
 
-    // --- Delete borrow slip ---
+    // Delete
     window.deleteBorrowSlip = function (id) {
         if (confirm("Bạn có chắc chắn muốn xóa phiếu mượn này?")) {
             fetch(`/api/borrow-slips/${id}`, { method: "DELETE" })
@@ -1023,7 +1033,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // --- New borrow ---
+    // New borrow
     document.getElementById("new-borrow-btn").addEventListener("click", () => {
         form.reset();
         document.getElementById('borrow-id').value = "";
@@ -1031,11 +1041,11 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.classList.remove("hidden");
     });
 
-    // --- Close modal ---
+    // Close modal
     closeModalBtn.addEventListener("click", () => modal.classList.add("hidden"));
     cancelBtn.addEventListener("click", () => modal.classList.add("hidden"));
 
-    // --- Submit form (create or update) ---
+    // Submit form
     form.addEventListener("submit", function (e) {
         e.preventDefault();
         const id = document.getElementById("borrow-id").value;
@@ -1066,7 +1076,6 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchBorrowSlips();
 });
 </script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const periodSelect = document.getElementById("report-period");
