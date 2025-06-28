@@ -89,4 +89,12 @@ public class BorrowSlip {
     public void setReturned(boolean returned) {
         isReturned = returned;
     }
+    
+    public LocalDate getreturnDate(){
+        return returnDate;
+    }
+
+    public void setreturnDate(LocalDate returnDate){
+        this.returnDate = returnDate;
+    }
 }

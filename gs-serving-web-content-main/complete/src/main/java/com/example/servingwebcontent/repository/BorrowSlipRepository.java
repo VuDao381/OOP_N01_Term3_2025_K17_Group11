@@ -25,4 +25,13 @@ public interface BorrowSlipRepository extends JpaRepository<BorrowSlip, Long> {
        "FROM BorrowSlip bs GROUP BY bs.book.id ORDER BY borrowCount DESC")
     List<Object[]> findTopBorrowedBooks();
 
+    List<BorrowSlip> findByBorrowDateBetween(LocalDate start, LocalDate end);
+
+    @Query("SELECT COUNT(b) FROM BorrowSlip b WHERE b.returnDate IS NOT NULL AND b.borrowDate BETWEEN :start AND :end")
+    long countReturnedBetween(LocalDate start, LocalDate end);
+
+    @Query("SELECT COUNT(b) FROM BorrowSlip b WHERE b.returnDate IS NULL AND b.dueDate < CURRENT_DATE AND b.borrowDate BETWEEN :start AND :end")
+    long countOverdueBetween(LocalDate start, LocalDate end);
+
+
 }
