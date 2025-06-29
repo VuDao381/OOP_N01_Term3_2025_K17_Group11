@@ -330,6 +330,21 @@ Thông báo thành công
 
     ![image](https://github.com/user-attachments/assets/5a728384-157a-4281-97b7-09b2510644f6)
 
+ # Quản lý tài khỏa người dùng
+
+ ![image](https://github.com/user-attachments/assets/e9c5864b-c8bc-4556-ad83-e4b61e7f5b21)
+
+   + Tạo tài khoản người dùng :
+
+     ![image](https://github.com/user-attachments/assets/3bc684e0-c0c5-4f7f-a5bf-889d80070329)
+
+   + Tạo tài khoản thành công :
+
+     ![image](https://github.com/user-attachments/assets/8f9ab02e-89cf-4439-a60b-c0ea7e379189)
+
+
+
+
 
 
  
