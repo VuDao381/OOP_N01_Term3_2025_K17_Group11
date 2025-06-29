@@ -245,6 +245,18 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    Các lớp UserBorrowed, LibrarySystem hoạt động như Service hỗ trợ xử lý logic trung gian
 
+ 2. Chức năng hệ thống (chia theo từng mô-đun)
+  
++Sách (Book)
+
+   Thêm sách mới vào hệ thống (LibrarySystem.addBook())
+
+   Kiểm tra và cập nhật trạng thái sách đang được mượn hay không
+
+   Hiển thị thông tin sách theo phiếu mượn
+
+   Tìm sách theo tiêu đề (Check.findBookByTitle())
+
    
 
 
