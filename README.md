@@ -2,9 +2,9 @@
 
 GROUP 11
 
-1.Dao Anh Vu
+1.Dào Anh Vũ
 
-2.Pham Khac Hung
+2.Phạm Khắc Hùng
 
 <b>Yêu cầu:</b>
  YÊU CẦU & MỤC TIÊU
