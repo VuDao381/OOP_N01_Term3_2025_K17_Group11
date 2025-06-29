@@ -313,6 +313,9 @@ Thông báo thành công
 ![HỆ THỐNG QUẢN LÝ THƯ VIỆN SÁCH SỐ                                   HÓA](https://github.com/user-attachments/assets/2ee0f95e-200e-4c39-aaca-dac1b76aaf87)
 
 <b> VIII.GIAO DIỆN </b>
+# Trang chủ
+
+![image](https://github.com/user-attachments/assets/7a8ba723-e58b-47c1-b126-0d6c8167538b)
 
  
 
