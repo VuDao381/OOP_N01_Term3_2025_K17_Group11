@@ -8,16 +8,14 @@ GROUP 11
 
 3.Nguyen Le Thu
 
-<br>
-
-Xây dựng ứng dụng <b> Quản lý thư viện sách số hóa </b>
-
 <b>Yêu cầu:</b>
 + Giao diện: Java Spring Boot.
 + Có chức năng quản lí Sách (Book) và Người dùng (User).
 
 <b>Chức năng:</b>
-
+I. GIỚI THIỆU
+Đây là ứng dụng Web hỗ trợ thư viện nhỏ quản lý việc mượn, trả sách, người dùng và phiếu mượn sách.
+Giao diện người dùng thân thiện, truy cập được qua trình duyệt.
 Quản lý sách
 
 + Thêm, sửa, xóa Sách (Book).
