@@ -128,6 +128,11 @@ GROUP 11
 | `BorrowSlip`   | Phiếu mượn: gán sách cho người dùng, ngày mượn, hạn trả, trạng thái trả |
 | `UserBorrowed` | Danh sách các phiếu mượn tương ứng với từng người dùng                  |
 
+   +Quy trình xử lý:
+     Ví dụ tạo phiếu mượn:
+User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
+
+     
 
    
 
