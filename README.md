@@ -105,6 +105,7 @@ GROUP 11
     Quản lý biên dịch: Maven (dự phòng nếu mở rộng)
 
    <b>IV. CẤU TRÚC DỰ ÁN :</b>
+   
    +Mô hình kiến trúc:
    
     Hệ thống được tổ chức theo mô hình 3 lớp chuẩn:
