@@ -52,6 +52,24 @@ GROUP 11
 | `email`    | `String`     | Địa chỉ email                |
 | `password` | `String`     | Mật khẩu đăng nhập           |
 
+   +Book (Sách)
+| Trường      | Kiểu dữ liệu | Mô tả                  |
+| ----------- | ------------ | ---------------------- |
+| `title`     | `String`     | Tên sách               |
+| `author`    | `String`     | Tác giả                |
+| `publisher` | `String`     | Nhà xuất bản           |
+| `numPages`  | `int`        | Số trang               |
+| `quantity`  | `int`        | Số lượng còn trong kho |
+
+   +BorrowSlip (Phiếu mượn)
+| Trường       | Kiểu dữ liệu | Mô tả                               |
+| ------------ | ------------ | ----------------------------------- |
+| `bookTitle`  | `String`     | Tên sách đã mượn                    |
+| `userId`     | `int`        | ID người dùng mượn sách             |
+| `borrowDate` | `LocalDate`  | Ngày mượn sách                      |
+| `dueDate`    | `LocalDate`  | Hạn trả sách                        |
+| `returned`   | `boolean`    | Đã trả hay chưa (`true` nếu đã trả) |
+
 
 
 
