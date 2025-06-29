@@ -43,6 +43,14 @@ GROUP 11
  <b>THIẾT KẾ CƠ SỞ DỮ LIỆU:</b>
    Hệ thống được thiết kế theo mô hình hướng đối tượng, mỗi thực thể đều được ánh xạ thành một lớp Java và tương ứng với bảng dữ liệu khi lưu trữ lâu dài.
    Dưới đây là bảng mô tả các thực thể chính:
+   
+   +User (Người dùng)
+| Trường     | Kiểu dữ liệu | Mô tả                        |
+| ---------- | ------------ | ---------------------------- |
+| `id`       | `int`        | Mã người dùng (tự động tăng) |
+| `name`     | `String`     | Tên người dùng               |
+| `email`    | `String`     | Địa chỉ email                |
+| `password` | `String`     | Mật khẩu đăng nhập           |
 
 
 
