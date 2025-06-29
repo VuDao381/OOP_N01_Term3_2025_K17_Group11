@@ -76,7 +76,7 @@ GROUP 11
    
     +Cho phép tìm kiếm theo tiêu đề sách, lọc sách chưa trả, sắp đến hạn hoặc quá hạn.
 
- <b>III: CÔNG NGHỆ VÀ CẤU TRÚC DỰ ÁN :</b>
+ <b>III: CÔNG NGHỆ :</b>
  -CÔNG NGHỆ ĐÃ SỬ DỤNG
    +Frontend (Giao diện):
 
@@ -103,6 +103,29 @@ GROUP 11
     Bộ công cụ hỗ trợ: Java Extension Pack, Live Share, Terminal, Debugger
 
     Quản lý biên dịch: Maven (dự phòng nếu mở rộng)
+
+   <b>IV. CẤU TRÚC DỰ ÁN :</b>
+   +Mô hình kiến trúc:
+    Hệ thống được tổ chức theo mô hình 3 lớp chuẩn:
+
+    [Client Layer]: HTML hiển thị thông qua Thymeleaf.
+
+    [Controller Layer]: Xử lý yêu cầu từ người dùng gửi lên (HTTP Request).
+
+    [Service Layer]: Xử lý logic nghiệp vụ: gán sách cho user, kiểm tra quá hạn, validate nhập sai,...
+
+    [Model Layer]: Gồm các lớp Book, User, BorrowSlip, UserBorrowed.
+
+    (Repository Layer): Dự kiến mở rộng dùng để lưu trữ với CSDL.
+
+   +Các thành phần chính trong project:
+| Thành phần     | Vai trò                                                                 |
+| -------------- | ----------------------------------------------------------------------- |
+| `Book`         | Đại diện cho sách: tiêu đề, tác giả, nhà xuất bản, số trang, tồn kho    |
+| `User`         | Người dùng hệ thống: tên, email, mật khẩu                               |
+| `BorrowSlip`   | Phiếu mượn: gán sách cho người dùng, ngày mượn, hạn trả, trạng thái trả |
+| `UserBorrowed` | Danh sách các phiếu mượn tương ứng với từng người dùng                  |
+
 
    
 
