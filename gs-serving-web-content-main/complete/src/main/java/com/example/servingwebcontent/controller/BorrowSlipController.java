@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,6 +36,7 @@ public class BorrowSlipController {
     private final BorrowSlipService borrowSlipService;
     private final UserService userService;
     private final BookService bookService;
+    private static final Logger logger = LoggerFactory.getLogger(BorrowSlipController.class);
 
     public BorrowSlipController(BorrowSlipService borrowSlipService,
                                 UserService userService,
@@ -44,118 +47,168 @@ public class BorrowSlipController {
     }
 
     @GetMapping
-    public List<BorrowSlip> getAllBorrowSlips() {
-        return borrowSlipService.getAllBorrowSlips();
+    public ResponseEntity<?> getAllBorrowSlips() {
+        try {
+            List<BorrowSlip> slips = borrowSlipService.getAllBorrowSlips();
+            return ResponseEntity.ok(slips);
+        } catch (Exception e) {
+            logger.error("Lỗi khi lấy danh sách phiếu mượn", e);
+            return ResponseEntity.status(500).body("Lỗi khi lấy danh sách phiếu mượn.");
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BorrowSlip> getBorrowSlipById(@PathVariable Long id) {
-        return borrowSlipService.getBorrowSlipById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<?> getBorrowSlipById(@PathVariable Long id) {
+        try {
+            return borrowSlipService.getBorrowSlipById(id)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            logger.error("Lỗi khi lấy phiếu mượn với ID: {}", id, e);
+            return ResponseEntity.status(500).body("Lỗi khi lấy phiếu mượn.");
+        }
     }
 
     @PostMapping
     public ResponseEntity<?> createBorrowSlip(@RequestBody BorrowSlipDTO dto) {
-        Optional<User> user = userService.getUserById(dto.getUserId());
-        Optional<Book> book = bookService.getBookById(dto.getBookId());
+        try {
+            Optional<User> user = userService.getUserById(dto.getUserId());
+            Optional<Book> book = bookService.getBookById(dto.getBookId());
 
-        if (user.isEmpty() || book.isEmpty()) {
-            return ResponseEntity.badRequest().body("User hoặc Book không tồn tại.");
+            if (user.isEmpty() || book.isEmpty()) {
+                logger.warn("Tạo phiếu mượn thất bại: User ID {} hoặc Book ID {} không tồn tại.", dto.getUserId(), dto.getBookId());
+                return ResponseEntity.badRequest().body("User hoặc Book không tồn tại.");
+            }
+
+            BorrowSlip slip = new BorrowSlip();
+            slip.setUser(user.get());
+            slip.setBook(book.get());
+            slip.setBorrowDate(LocalDate.parse(dto.getBorrowDate()));
+            slip.setDueDate(LocalDate.parse(dto.getDueDate()));
+            slip.setReturned(false);
+
+            BorrowSlip savedSlip = borrowSlipService.saveBorrowSlip(slip);
+            logger.info("Đã tạo phiếu mượn mới cho User ID {} và Book ID {}", dto.getUserId(), dto.getBookId());
+            return ResponseEntity.ok(savedSlip);
+        } catch (Exception e) {
+            logger.error("Lỗi khi tạo phiếu mượn", e);
+            return ResponseEntity.status(500).body("Lỗi khi tạo phiếu mượn.");
         }
-
-        BorrowSlip slip = new BorrowSlip();
-        slip.setUser(user.get());
-        slip.setBook(book.get());
-
-        // ✅ Chuyển String -> LocalDate
-        slip.setBorrowDate(LocalDate.parse(dto.getBorrowDate()));
-        slip.setDueDate(LocalDate.parse(dto.getDueDate()));
-
-        slip.setReturned(false);
-
-        BorrowSlip savedSlip = borrowSlipService.saveBorrowSlip(slip);
-        return ResponseEntity.ok(savedSlip);
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateBorrowSlip(@PathVariable Long id, @RequestBody BorrowSlipDTO dto) {
-        return borrowSlipService.getBorrowSlipById(id)
-                .map(existingSlip -> {
-                    Optional<User> user = userService.getUserById(dto.getUserId());
-                    Optional<Book> book = bookService.getBookById(dto.getBookId());
+        try {
+            return borrowSlipService.getBorrowSlipById(id)
+                    .map(existingSlip -> {
+                        Optional<User> user = userService.getUserById(dto.getUserId());
+                        Optional<Book> book = bookService.getBookById(dto.getBookId());
 
-                    if (user.isEmpty() || book.isEmpty()) {
-                        return ResponseEntity.badRequest().body("User hoặc Book không tồn tại.");
-                    }
+                        if (user.isEmpty() || book.isEmpty()) {
+                            logger.warn("Cập nhật thất bại: User ID {} hoặc Book ID {} không tồn tại.", dto.getUserId(), dto.getBookId());
+                            return ResponseEntity.badRequest().body("User hoặc Book không tồn tại.");
+                        }
 
-                    existingSlip.setUser(user.get());
-                    existingSlip.setBook(book.get());
-                    existingSlip.setBorrowDate(LocalDate.parse(dto.getBorrowDate()));
-                    existingSlip.setDueDate(LocalDate.parse(dto.getDueDate()));
+                        existingSlip.setUser(user.get());
+                        existingSlip.setBook(book.get());
+                        existingSlip.setBorrowDate(LocalDate.parse(dto.getBorrowDate()));
+                        existingSlip.setDueDate(LocalDate.parse(dto.getDueDate()));
 
-
-                    BorrowSlip updated = borrowSlipService.saveBorrowSlip(existingSlip);
-                    return ResponseEntity.ok(updated);
-                })
-                .orElse(ResponseEntity.notFound().build());
+                        BorrowSlip updated = borrowSlipService.saveBorrowSlip(existingSlip);
+                        logger.info("Cập nhật phiếu mượn ID {}", id);
+                        return ResponseEntity.ok(updated);
+                    })
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            logger.error("Lỗi khi cập nhật phiếu mượn ID {}", id, e);
+            return ResponseEntity.status(500).body("Lỗi khi cập nhật phiếu mượn.");
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBorrowSlip(@PathVariable Long id) {
-        boolean deleted = borrowSlipService.deleteBorrowSlip(id);
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    public ResponseEntity<?> deleteBorrowSlip(@PathVariable Long id) {
+        try {
+            boolean deleted = borrowSlipService.deleteBorrowSlip(id);
+            if (deleted) {
+                logger.info("Đã xoá phiếu mượn ID {}", id);
+                return ResponseEntity.noContent().build();
+            } else {
+                logger.warn("Xoá phiếu mượn thất bại: không tìm thấy ID {}", id);
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            logger.error("Lỗi khi xoá phiếu mượn ID {}", id, e);
+            return ResponseEntity.status(500).body("Lỗi khi xoá phiếu mượn.");
+        }
     }
 
     @GetMapping("/recent")
-    public List<Map<String, Object>> getRecentBorrowedBooks() {
-        List<BorrowSlip> slips = borrowSlipService.getRecentBorrowSlips(5);
-        List<Map<String, Object>> result = new ArrayList<>();
+    public ResponseEntity<?> getRecentBorrowedBooks() {
+        try {
+            List<BorrowSlip> slips = borrowSlipService.getRecentBorrowSlips(5);
+            List<Map<String, Object>> result = new ArrayList<>();
 
-        for (BorrowSlip slip : slips) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("bookTitle", slip.getBook().getTitle());
-            map.put("userName", slip.getUser().getUsername());
-            map.put("borrowDate", slip.getBorrowDate());
-            map.put("dueDate", slip.getDueDate());
-            result.add(map);
+            for (BorrowSlip slip : slips) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("bookTitle", slip.getBook().getTitle());
+                map.put("userName", slip.getUser().getUsername());
+                map.put("borrowDate", slip.getBorrowDate());
+                map.put("dueDate", slip.getDueDate());
+                result.add(map);
+            }
+
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            logger.error("Lỗi khi lấy danh sách mượn gần đây", e);
+            return ResponseEntity.status(500).body("Lỗi khi lấy danh sách mượn gần đây.");
         }
-
-        return result;
     }
 
     @GetMapping("/popular")
-    public List<Map<String, Object>> getPopularBooks() {
-        List<Book> books = borrowSlipService.getPopularBooks(5);
-        List<Map<String, Object>> result = new ArrayList<>();
+    public ResponseEntity<?> getPopularBooks() {
+        try {
+            List<Book> books = borrowSlipService.getPopularBooks(5);
+            List<Map<String, Object>> result = new ArrayList<>();
 
-        for (Book book : books) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("title", book.getTitle());
-            map.put("author", book.getAuthor());
-            map.put("publisher", book.getPublisher());
-            result.add(map);
+            for (Book book : books) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("title", book.getTitle());
+                map.put("author", book.getAuthor());
+                map.put("publisher", book.getPublisher());
+                result.add(map);
+            }
+
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            logger.error("Lỗi khi lấy sách mượn phổ biến", e);
+            return ResponseEntity.status(500).body("Lỗi khi lấy sách được mượn nhiều nhất.");
         }
-
-        return result;
     }
+
     @PutMapping("/{id}/return")
-public ResponseEntity<?> markAsReturned(@PathVariable Long id) {
-    Optional<BorrowSlip> optional = borrowSlipService.getBorrowSlipById(id);
-    if (optional.isEmpty()) {
-        return ResponseEntity.notFound().build(); // 404 nếu không tìm thấy
-    }
+    public ResponseEntity<?> markAsReturned(@PathVariable Long id) {
+        try {
+            Optional<BorrowSlip> optional = borrowSlipService.getBorrowSlipById(id);
+            if (optional.isEmpty()) {
+                logger.warn("Không tìm thấy phiếu mượn để đánh dấu trả: ID {}", id);
+                return ResponseEntity.notFound().build();
+            }
 
-    BorrowSlip slip = optional.get();
-    if (slip.isReturned()) {
-        return ResponseEntity.badRequest().body("Phiếu mượn này đã được trả trước đó.");
-    }
+            BorrowSlip slip = optional.get();
+            if (slip.isReturned()) {
+                logger.warn("Phiếu mượn ID {} đã được trả trước đó.", id);
+                return ResponseEntity.badRequest().body("Phiếu mượn này đã được trả trước đó.");
+            }
 
-    slip.setReturned(true);
-    slip.setreturnDate(LocalDate.now()); // ngày trả hiện tại
-    borrowSlipService.saveBorrowSlip(slip); // lưu lại vào DB
+            slip.setReturned(true);
+            slip.setreturnDate(LocalDate.now());
+            borrowSlipService.saveBorrowSlip(slip);
 
-    return ResponseEntity.ok("Đã đánh dấu là đã trả.");
+            logger.info("Đánh dấu đã trả cho phiếu mượn ID {}", id);
+            return ResponseEntity.ok("Đã đánh dấu là đã trả.");
+        } catch (Exception e) {
+            logger.error("Lỗi khi đánh dấu phiếu mượn ID {} đã trả", id, e);
+            return ResponseEntity.status(500).body("Lỗi khi đánh dấu đã trả.");
+        }
     }
 }
