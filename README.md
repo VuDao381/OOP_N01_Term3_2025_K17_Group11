@@ -321,9 +321,15 @@ Thông báo thành công
 
 ![image](https://github.com/user-attachments/assets/e9301b74-6c18-4890-abb6-6a73a1f84050)
 
-  + Tạo phiếu mượn sách
+  + Tạo phiếu mượn sách :
 
     ![image](https://github.com/user-attachments/assets/06580236-501c-4e04-ad5b-93e909337ace)
+
+  
+  + Phiếu mượn sách tạo thành công :
+
+    ![image](https://github.com/user-attachments/assets/5a728384-157a-4281-97b7-09b2510644f6)
+
 
 
  
