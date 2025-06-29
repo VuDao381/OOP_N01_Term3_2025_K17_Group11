@@ -237,7 +237,7 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    (Có thể mở rộng thêm: trang thêm user, sách, quản lý phiếu mượn...)
  
- + Controller (Điều hướng và xử lý)
++Controller (Điều hướng và xử lý)
 
    Các controller tiếp nhận yêu cầu từ người dùng qua URL, xử lý logic và trả dữ liệu về View:
 
