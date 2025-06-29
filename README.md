@@ -257,7 +257,23 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    Tìm sách theo tiêu đề (Check.findBookByTitle())
 
+ +Phiếu mượn (BorrowSlip)
+
+   Tạo phiếu mượn sách (LibrarySystem.MuonSach())
+
+   Kiểm tra trạng thái quá hạn (Check.checkAndDisplayOverdue())
+
+   Thông báo sách sắp đến hạn trả trong 3 ngày (UserBorrowed.notifyUpcomingDueDates())
+
+   Lưu danh sách phiếu mượn (UserBorrowed.addBorrowSlip())
+
+ +Người dùng (User)
    
+   Thêm, sửa, xóa người dùng (UserManagement)
+
+   Tìm người dùng theo ID (Check.findUserById())
+
+   Hiển thị sách đã mượn theo người dùng (UserBorrowed.displayUserBorrowedBooks())
 
 
 
