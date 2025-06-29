@@ -134,7 +134,9 @@ GROUP 11
 User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
 
   <b>V. CẤU TRÚC THƯ MỤC:</b>
-  OOP_N01_TERM3_2025_K17_GROUPX_QLTV
+
+  ```
+OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 ├── .vscode/
 │   └── settings.json
 │
@@ -192,7 +194,7 @@ User nhập thông tin → Controller nhận request →Service xử lý: kiểm
 │   │   ├── UserBorrowed.java
 │   │   ├── UserBorrowedController.java
 │   │   └── UserManagement.java
-│   │
+│
 │   ├── test/
 │   │   ├── BookSearchTestHelper.java
 │   │   ├── BookTest.java
@@ -206,6 +208,7 @@ User nhập thông tin → Controller nhận request →Service xử lý: kiểm
 │   │   └── UserTest.java
 │
 │   └── README.md                                # Mô tả phần Library core
+```
 
  
 
