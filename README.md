@@ -228,7 +228,7 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    Các lớp hỗ trợ như UserBorrowed, Check, LibrarySystem, UserManagement...
 
- + View (Giao diện)
++View (Giao diện)
    Sử dụng Thymeleaf để hiển thị các trang HTML động, ví dụ:
 
    Trang hiển thị danh sách sách đã mượn (user-borrowed.html)
@@ -237,6 +237,13 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    (Có thể mở rộng thêm: trang thêm user, sách, quản lý phiếu mượn...)
  
+ + Controller (Điều hướng và xử lý)
+
+   Các controller tiếp nhận yêu cầu từ người dùng qua URL, xử lý logic và trả dữ liệu về View:
+
+   UserBorrowedController: Điều phối hiển thị danh sách sách đã mượn và thông báo sách sắp đến hạn trả.
+
+   Các lớp UserBorrowed, LibrarySystem hoạt động như Service hỗ trợ xử lý logic trung gian
 
    
 
