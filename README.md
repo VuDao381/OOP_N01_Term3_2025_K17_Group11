@@ -227,7 +227,15 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
    BorrowSlipNotice – đối tượng trung gian hiển thị thông báo sắp đến hạn trả
 
    Các lớp hỗ trợ như UserBorrowed, Check, LibrarySystem, UserManagement...
-  
+
+ + View (Giao diện)
+   Sử dụng Thymeleaf để hiển thị các trang HTML động, ví dụ:
+
+   Trang hiển thị danh sách sách đã mượn (user-borrowed.html)
+
+   Trang thông báo sách sắp đến hạn trả
+
+   (Có thể mở rộng thêm: trang thêm user, sách, quản lý phiếu mượn...)
  
 
    
