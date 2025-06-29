@@ -283,7 +283,29 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    Hiển thị danh sách sách đã mượn cho từng người dùng
 
-   Gợi ý: Có thể mở rộng xuất thống kê ra Excel hoặc PDF
+  3. Luồng xử lý chức năng tiêu biểu
+
+     Ví dụ: Mượn sách
+
+Người dùng được thêm hoặc đã tồn tại
+
+Người dùng chọn sách muốn mượn (phải còn tồn kho)
+
+Nhập ngày mượn và hạn trả
+
+Gọi MuonSach(user, bookTitle, borrowDate, dueDate)
+
+Hệ thống kiểm tra tình trạng sách:
+
+Nếu sách không tồn tại → thông báo lỗi
+
+Nếu sách đã bị mượn → từ chối mượn
+
+Nếu hợp lệ → tạo BorrowSlip, thêm vào danh sách
+
+Cập nhật trạng thái sách thành “đang mượn”
+
+Thông báo thành công
 
 
 
