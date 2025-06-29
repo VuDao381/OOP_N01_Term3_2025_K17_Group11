@@ -76,6 +76,35 @@ GROUP 11
    
     +Cho phép tìm kiếm theo tiêu đề sách, lọc sách chưa trả, sắp đến hạn hoặc quá hạn.
 
+ <b>III: CÔNG NGHỆ VÀ CẤU TRÚC DỰ ÁN :</b>
+ -CÔNG NGHỆ ĐÃ SỬ DỤNG
+   +Frontend (Giao diện):
+
+    Sử dụng Spring Boot kết hợp với công cụ template engine Thymeleaf để dựng giao diện động (HTML động).
+
+    Cho phép hiển thị danh sách sách, người dùng và phiếu mượn trực tiếp trên trình duyệt.
+
+   +Backend (Xử lý logic):
+
+    Viết bằng Java 17.
+
+    Kiến trúc mô hình phân lớp MVC (Model - View - Controller).
+
+   +Lưu trữ dữ liệu:
+
+    Hiện tại dữ liệu được lưu trong bộ nhớ (RAM) bằng Collection như List, Map.
+
+    Định hướng tương lai mở rộng với lưu trữ file nhị phân hoặc kết nối MySQL/SQLite.
+
+   +Công cụ phát triển:
+
+    IDE: Visual Studio Code
+
+    Bộ công cụ hỗ trợ: Java Extension Pack, Live Share, Terminal, Debugger
+
+    Quản lý biên dịch: Maven (dự phòng nếu mở rộng)
+
+   
 
 
 
