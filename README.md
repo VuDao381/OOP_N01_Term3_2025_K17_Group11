@@ -317,6 +317,15 @@ Thông báo thành công
 
 ![image](https://github.com/user-attachments/assets/7a8ba723-e58b-47c1-b126-0d6c8167538b)
 
+# Quản lý Sách
+
+![image](https://github.com/user-attachments/assets/e9301b74-6c18-4890-abb6-6a73a1f84050)
+
+  + Tạo phiếu mượn sách
+
+    ![image](https://github.com/user-attachments/assets/06580236-501c-4e04-ad5b-93e909337ace)
+
+
  
 
 
