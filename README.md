@@ -17,53 +17,30 @@ GROUP 11
  Hỗ trợ xử lý mượn/trả sách qua phiếu mượn (BorrowSlip)
 
 <b>Chức năng:</b>
-I. GIỚI THIỆU
-Đây là ứng dụng Web hỗ trợ thư viện nhỏ quản lý việc mượn, trả sách, người dùng và phiếu mượn sách.
-Giao diện người dùng thân thiện, truy cập được qua trình duyệt.
-Quản lý sách
+GIỚI THIỆU
+Đây là ứng dụng Web giúp các thư viện nhỏ quản lý việc mượn – trả sách, quản lý người dùng và sách trong kho. Ứng dụng có giao diện web thân thiện, truy cập được qua trình duyệt.
 
-+ Thêm, sửa, xóa Sách (Book).
+<b>Chức năng chính:</b>
+CHỨC NĂNG CHÍNH
+📚 Quản lý sách
+Thêm, sửa, xóa Sách (Book)
 
-+ Liệt kê thông tin về Sách, có thể lọc sách theo tác giả, nhà xuất bản, số lượng tồn kho.
+Liệt kê danh sách sách
 
-Quản lý người dùng
+Tìm kiếm theo tên, tác giả, nhà xuất bản, số lượng
 
-+ Thêm, sửa, xóa Người dùng(User).
-+ Hiển thị danh sách người dùng.
+👤 Quản lý người dùng
+Thêm, sửa, xóa Người dùng (User)
 
-Quản lí phiếu mượn
-+ Gán sách (Book) cho người dùng (User) qua phiếu mượn (BorrowSlip).
-+ Cho phép mượn/trả sách, tự động tính ngày mượn/trả.
-+ Không cho phép mượn nếu sách không còn tồn kho.
+Hiển thị danh sách người dùng theo ID, email...
 
-- Dữ liệu được lưu trữ xuống file nhị phân
+📄 Quản lý phiếu mượn
+Gán sách cho người dùng thông qua phiếu mượn (BorrowSlip)
 
-+ Cần tạo các lớp liên quan đến Người dùng (User), Sách (Book), và Phiếu mượn (Borrow Slip) để đọc, ghi xuống 1 hay nhiều file.
+Cho phép mượn/trả sách, tự động tính ngày mượn, hạn trả
 
-- Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được lưu trữ dưới dạng các Collection tùy chọn như ArrayList, LinkedList, Map, ....
-
- # Sơ đô cấu trúc
-
- Sơ đồ Class Diagram
-
-![uml](https://github.com/user-attachments/assets/a0d001b8-3d16-4f41-97ba-bf6f10af3462)
-
-Login Activity Diagram
-
-![login-activity](https://github.com/user-attachments/assets/7e711582-4b7e-4229-93a5-d3e16a44c86c)
+Kiểm tra sách đã mượn, chưa trả, hoặc quá hạn
 
 
-# Sơ đồ hành vi
 
-## Thêm
-
-## Sửa
-
-
-## Xóa
-
-
-Màn hình UI cho phương thức chinh
-
-![image](https://github.com/user-attachments/assets/7aa6983c-9755-4158-96f3-6b9c3ffa0e70)
 
