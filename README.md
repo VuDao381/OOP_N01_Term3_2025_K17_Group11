@@ -44,7 +44,7 @@ GROUP 11
    Hệ thống được thiết kế theo mô hình hướng đối tượng, mỗi thực thể đều được ánh xạ thành một lớp Java và tương ứng với bảng dữ liệu khi lưu trữ lâu dài.
    Dưới đây là bảng mô tả các thực thể chính:
    
-   +User (Người dùng)
+   -User (Người dùng)
 | Trường     | Kiểu dữ liệu | Mô tả                        |
 | ---------- | ------------ | ---------------------------- |
 | `id`       | `int`        | Mã người dùng (tự động tăng) |
@@ -52,7 +52,7 @@ GROUP 11
 | `email`    | `String`     | Địa chỉ email                |
 | `password` | `String`     | Mật khẩu đăng nhập           |
 
-   +Book (Sách)
+   -Book (Sách)
 | Trường      | Kiểu dữ liệu | Mô tả                  |
 | ----------- | ------------ | ---------------------- |
 | `title`     | `String`     | Tên sách               |
@@ -61,7 +61,7 @@ GROUP 11
 | `numPages`  | `int`        | Số trang               |
 | `quantity`  | `int`        | Số lượng còn trong kho |
 
-   +BorrowSlip (Phiếu mượn)
+   -BorrowSlip (Phiếu mượn)
 | Trường       | Kiểu dữ liệu | Mô tả                               |
 | ------------ | ------------ | ----------------------------------- |
 | `bookTitle`  | `String`     | Tên sách đã mượn                    |
@@ -70,9 +70,9 @@ GROUP 11
 | `dueDate`    | `LocalDate`  | Hạn trả sách                        |
 | `returned`   | `boolean`    | Đã trả hay chưa (`true` nếu đã trả) |
 
-   +UserBorrowed (Lịch sử mượn sách của người dùng)
-    Chứa danh sách các BorrowSlip ứng với mỗi User.
-    Cho phép tìm kiếm theo tiêu đề sách, lọc sách chưa trả, sắp đến hạn hoặc quá hạn.
+   -UserBorrowed (Lịch sử mượn sách của người dùng)
+    +Chứa danh sách các BorrowSlip ứng với mỗi User
+    +Cho phép tìm kiếm theo tiêu đề sách, lọc sách chưa trả, sắp đến hạn hoặc quá hạn.
 
 
 
