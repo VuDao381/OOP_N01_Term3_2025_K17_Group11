@@ -9,8 +9,12 @@ GROUP 11
 3.Nguyen Le Thu
 
 <b>Yêu cầu:</b>
-+ Giao diện: Java Spring Boot.
-+ Có chức năng quản lí Sách (Book) và Người dùng (User).
+ YÊU CẦU & MỤC TIÊU
+ Giao diện: Java Spring Boot (Web)
+
+ Chức năng quản lý: Sách (Book) và Người dùng (User)
+
+ Hỗ trợ xử lý mượn/trả sách qua phiếu mượn (BorrowSlip)
 
 <b>Chức năng:</b>
 I. GIỚI THIỆU
