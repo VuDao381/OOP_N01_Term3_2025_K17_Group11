@@ -71,7 +71,9 @@ GROUP 11
 | `returned`   | `boolean`    | Đã trả hay chưa (`true` nếu đã trả) |
 
    -UserBorrowed (Lịch sử mượn sách của người dùng)
+    
     +Chứa danh sách các BorrowSlip ứng với mỗi User
+   
     +Cho phép tìm kiếm theo tiêu đề sách, lọc sách chưa trả, sắp đến hạn hoặc quá hạn.
 
 
