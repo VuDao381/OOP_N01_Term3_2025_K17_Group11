@@ -16,7 +16,7 @@ GROUP 11
 
  Hỗ trợ xử lý mượn/trả sách qua phiếu mượn (BorrowSlip)
 
-GIỚI THIỆU
+<b>GIỚI THIỆU :</b>
 Đây là ứng dụng Web giúp các thư viện nhỏ quản lý việc mượn – trả sách, quản lý người dùng và sách trong kho. Ứng dụng có giao diện web thân thiện, truy cập được qua trình duyệt.
 
 <b>Chức năng chính:</b>
