@@ -274,6 +274,17 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
    Tìm người dùng theo ID (Check.findUserById())
 
    Hiển thị sách đã mượn theo người dùng (UserBorrowed.displayUserBorrowedBooks())
+   
+ +Thống kê và thông báo
+
+   Thống kê số sách sắp đến hạn trả (giao diện và dòng lệnh)
+
+   Liệt kê phiếu mượn quá hạn (console)
+
+   Hiển thị danh sách sách đã mượn cho từng người dùng
+
+   Gợi ý: Có thể mở rộng xuất thống kê ra Excel hoặc PDF
+
 
 
 
