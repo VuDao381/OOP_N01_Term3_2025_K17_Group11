@@ -2,7 +2,7 @@
 
 GROUP 11
 
-1.Dào Anh Vũ
+1.Đào Anh Vũ
 
 2.Phạm Khắc Hùng
 
@@ -10,9 +10,9 @@ GROUP 11
  YÊU CẦU & MỤC TIÊU
  Giao diện: Java Spring Boot (Web)
 
- Chức năng quản lý: Sách (Book) và Người dùng (User)
+ Chức năng quản lý: Sách (Book) và Người dùng (User).
 
- Hỗ trợ xử lý mượn/trả sách qua phiếu mượn (BorrowSlip)
+ Hỗ trợ xử lý mượn/trả sách qua phiếu mượn (BorrowSlip).
 
 <b>I GIỚI THIỆU :</b>
 Đây là ứng dụng Web giúp các thư viện nhỏ quản lý việc mượn – trả sách, quản lý người dùng và sách trong kho. Ứng dụng có giao diện web thân thiện, truy cập được qua trình duyệt.
@@ -22,37 +22,40 @@ GROUP 11
  Quản lý sách
   +Thêm, sửa, xóa Sách (Book)
 
-  +Liệt kê danh sách sách
+  + Liệt kê danh sách sách.
 
-  +Tìm kiếm theo tên, tác giả, nhà xuất bản, số lượng
+  + Tìm kiếm theo tên, tác giả, nhà xuất bản.
+
+  + Lọc danh sách theo chữ cái đầu của sách theo thứ tự từ A-Z và ngược lại.
 
   Quản lý người dùng
-   +Thêm, sửa, xóa Người dùng (User)
+   +Thêm, sửa, xóa Người dùng (User).
 
    +Hiển thị danh sách người dùng theo ID, email...
 
   Quản lý phiếu mượn
-   +Gán sách cho người dùng thông qua phiếu mượn (BorrowSlip)
+   + Gán sách cho người dùng thông qua phiếu mượn (BorrowSlip).
    
-   +Cho phép mượn/trả sách, tự động tính ngày mượn, hạn trả
+   + Cho phép mượn, nhập thủ công ngày mượn, hạn trả. Đối với những sách đang mượn hoặc quá hạn trả cho phép cập nhật bằng cách đánh dấu đã trả.
 
-   +Kiểm tra sách đã mượn, chưa trả, hoặc quá hạn
+   + Kiểm tra sách đã mượn, chưa trả, hoặc quá hạn
 
  <b>THIẾT KẾ CƠ SỞ DỮ LIỆU:</b>
    Hệ thống được thiết kế theo mô hình hướng đối tượng, mỗi thực thể đều được ánh xạ thành một lớp Java và tương ứng với bảng dữ liệu khi lưu trữ lâu dài.
    Dưới đây là bảng mô tả các thực thể chính:
    
    -User (Người dùng)
-| Trường     | Kiểu dữ liệu | Mô tả                        |
-| ---------- | ------------ | ---------------------------- |
-| `id`       | `int`        | Mã người dùng (tự động tăng) |
-| `name`     | `String`     | Tên người dùng               |
-| `email`    | `String`     | Địa chỉ email                |
-| `password` | `String`     | Mật khẩu đăng nhập           |
+| Trường         | Kiểu dữ liệu | Mô tả                        |
+| ----------     | ------------ | ---------------------------- |
+| `id`           | `Long`       | Mã người dùng (tự động tăng) |
+| `username`     | `String`     | Tên người dùng               |
+| `useremail`    | `String`     | Địa chỉ email                |
+| `userpassword` | `String`     | Mật khẩu đăng nhập           |
 
    -Book (Sách)
 | Trường      | Kiểu dữ liệu | Mô tả                  |
 | ----------- | ------------ | ---------------------- |
+| `id`        | `Long`       | Mã sách (tự động tăng) |
 | `title`     | `String`     | Tên sách               |
 | `author`    | `String`     | Tác giả                |
 | `publisher` | `String`     | Nhà xuất bản           |
@@ -60,19 +63,16 @@ GROUP 11
 | `quantity`  | `int`        | Số lượng còn trong kho |
 
    -BorrowSlip (Phiếu mượn)
-| Trường       | Kiểu dữ liệu | Mô tả                               |
-| ------------ | ------------ | ----------------------------------- |
-| `bookTitle`  | `String`     | Tên sách đã mượn                    |
-| `userId`     | `int`        | ID người dùng mượn sách             |
-| `borrowDate` | `LocalDate`  | Ngày mượn sách                      |
-| `dueDate`    | `LocalDate`  | Hạn trả sách                        |
-| `returned`   | `boolean`    | Đã trả hay chưa (`true` nếu đã trả) |
+| Trường       | Kiểu dữ liệu          | Mô tả                                                        |
+| ------------ | --------------------- | ------------------------------------------------------------ |
+| `id`         | `Long`                | Mã phiếu mượn                                                |
+| `user`       | `User`                | Đối tượng người dùng mượn sách (liên kết ManyToOne đến User) |
+| `book`       | `Book`                | Đối tượng sách đã được mượn (liên kết ManyToOne đến Book)    |
+| `borrowDate` | `LocalDate`           | Ngày mượn sách                                               |
+| `dueDate`    | `LocalDate`           | Ngày phải trả sách (Hạn cuối cùng)                           |
+| `isReturned` | `boolean`             | Đã trả hay chưa (`true` nếu đã trả, `false` nếu chưa)        |
+| `returnDate` | `LocalDate`(nullable) | Ngày thực tế đã trả sách (có thể null nếu chưa trả)          |
 
-   -UserBorrowed (Lịch sử mượn sách của người dùng)
-    
-    +Chứa danh sách các BorrowSlip ứng với mỗi User
-   
-    +Cho phép tìm kiếm theo tiêu đề sách, lọc sách chưa trả, sắp đến hạn hoặc quá hạn.
 
  <b>III: CÔNG NGHỆ :</b>
  -CÔNG NGHỆ ĐÃ SỬ DỤNG
@@ -165,7 +165,10 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 │   │   │   │   │   │   ├── Book.java
 │   │   │   │   │   │   ├── BorrowSlip.java
 │   │   │   │   │   │   └── User.java
-│   │   │   │   │   ├── repository/                # (interface JPA, nếu có)
+│   │   │   │   │   ├── repository/
+│   │   │   │   │   │   ├── BookRepository.java
+│   │   │   │   │   │   ├── BorrowSlipRepository.java
+│   │   │   │   │   │   └── UserRepository.java
 │   │   │   │   │   ├── service/
 │   │   │   │   │   │   ├── BookService.java
 │   │   │   │   │   │   ├── BorrowSlipService.java
@@ -222,9 +225,6 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    BorrowSlip – phiếu mượn sách (gồm ngày mượn, hạn trả, trạng thái)
 
-   BorrowSlipNotice – đối tượng trung gian hiển thị thông báo sắp đến hạn trả
-
-   Các lớp hỗ trợ như UserBorrowed, Check, LibrarySystem, UserManagement...
 
 +View (Giao diện)
    Sử dụng Thymeleaf để hiển thị các trang HTML động, ví dụ:
