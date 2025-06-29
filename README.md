@@ -1,4 +1,4 @@
-# OOP_N01_Term3_2025_K17_Group11
+# QUẢN LÝ THƯ VIỆN SÁCH SỐ HÓA
 
 GROUP 11
 
