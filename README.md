@@ -342,6 +342,13 @@ Thông báo thành công
 
      ![image](https://github.com/user-attachments/assets/8f9ab02e-89cf-4439-a60b-c0ea7e379189)
 
+ # Quản lý trả mượn sách
+
+ ![image](https://github.com/user-attachments/assets/2a9c340f-6d40-442c-82c2-133b5a6c4a28)
+
+ # Báo cáo số lượng mượn sách và danh sách đã trả sách ,danh sách mượn đã quá hạn
+
+ ![image](https://github.com/user-attachments/assets/595f24d9-2ae0-437e-91ca-2fe5e6fee1b4)
 
 
 
