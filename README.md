@@ -40,6 +40,10 @@ GROUP 11
 
    +Kiểm tra sách đã mượn, chưa trả, hoặc quá hạn
 
+ <b>THIẾT KẾ CƠ SỞ DỮ LIỆU:</b>
+   Hệ thống được thiết kế theo mô hình hướng đối tượng, mỗi thực thể đều được ánh xạ thành một lớp Java và tương ứng với bảng dữ liệu khi lưu trữ lâu dài.
+   Dưới đây là bảng mô tả các thực thể chính:
+
 
 
 
