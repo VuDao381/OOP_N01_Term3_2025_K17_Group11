@@ -130,6 +130,7 @@ GROUP 11
 
    +Quy trình xử lý:
      Ví dụ tạo phiếu mượn:
+     
 User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
 
      
