@@ -21,25 +21,25 @@ GIỚI THIỆU
 Đây là ứng dụng Web giúp các thư viện nhỏ quản lý việc mượn – trả sách, quản lý người dùng và sách trong kho. Ứng dụng có giao diện web thân thiện, truy cập được qua trình duyệt.
 
 <b>Chức năng chính:</b>
-CHỨC NĂNG CHÍNH
-📚 Quản lý sách
-Thêm, sửa, xóa Sách (Book)
 
-Liệt kê danh sách sách
+ Quản lý sách
+  +Thêm, sửa, xóa Sách (Book)
 
-Tìm kiếm theo tên, tác giả, nhà xuất bản, số lượng
+  +Liệt kê danh sách sách
 
-👤 Quản lý người dùng
-Thêm, sửa, xóa Người dùng (User)
+  +Tìm kiếm theo tên, tác giả, nhà xuất bản, số lượng
 
-Hiển thị danh sách người dùng theo ID, email...
+  Quản lý người dùng
+   +Thêm, sửa, xóa Người dùng (User)
 
-📄 Quản lý phiếu mượn
-Gán sách cho người dùng thông qua phiếu mượn (BorrowSlip)
+   +Hiển thị danh sách người dùng theo ID, email...
 
-Cho phép mượn/trả sách, tự động tính ngày mượn, hạn trả
+  Quản lý phiếu mượn
+   +Gán sách cho người dùng thông qua phiếu mượn (BorrowSlip)
+   
+   +Cho phép mượn/trả sách, tự động tính ngày mượn, hạn trả
 
-Kiểm tra sách đã mượn, chưa trả, hoặc quá hạn
+   +Kiểm tra sách đã mượn, chưa trả, hoặc quá hạn
 
 
 
