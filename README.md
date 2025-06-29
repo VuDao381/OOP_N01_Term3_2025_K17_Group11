@@ -106,6 +106,7 @@ GROUP 11
 
    <b>IV. CẤU TRÚC DỰ ÁN :</b>
    +Mô hình kiến trúc:
+   
     Hệ thống được tổ chức theo mô hình 3 lớp chuẩn:
 
     [Client Layer]: HTML hiển thị thông qua Thymeleaf.
