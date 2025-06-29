@@ -133,6 +133,82 @@ GROUP 11
      
 User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
 
+  <b>V. CẤU TRÚC THƯ MỤC:</b>
+    OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
+├── .vscode/
+│   └── settings.json
+│
+├── gs-serving-web-content-main/                 # PHẦN 1: Ứng dụng web Spring Boot
+│   ├── complete/
+│   │   ├── build.gradle
+│   │   ├── settings.gradle
+│   │   ├── pom.xml
+│   │   ├── gradlew*
+│   │   ├── mvnw*
+│   │   ├── .gitignore
+│   │   ├── LICENSE.txt
+│   │   ├── CONTRIBUTING.adoc
+│   │   ├── src/
+│   │   │   ├── main/
+│   │   │   │   ├── java/com/example/servingwebcontent/
+│   │   │   │   │   ├── controller/
+│   │   │   │   │   │   ├── BookController.java
+│   │   │   │   │   │   ├── BorrowSlipController.java
+│   │   │   │   │   │   ├── DashboardController.java
+│   │   │   │   │   │   ├── ReportController.java
+│   │   │   │   │   │   └── UserController.java
+│   │   │   │   │   ├── dto/
+│   │   │   │   │   │   ├── BorrowSlipDTO.java
+│   │   │   │   │   │   ├── DashboardStats.java
+│   │   │   │   │   │   └── ReportDTO.java
+│   │   │   │   │   ├── model/
+│   │   │   │   │   │   ├── Book.java
+│   │   │   │   │   │   ├── BorrowSlip.java
+│   │   │   │   │   │   └── User.java
+│   │   │   │   │   ├── repository/                # (interface JPA, nếu có)
+│   │   │   │   │   ├── service/
+│   │   │   │   │   │   ├── BookService.java
+│   │   │   │   │   │   ├── BorrowSlipService.java
+│   │   │   │   │   │   ├── ReportService.java
+│   │   │   │   │   │   └── UserService.java
+│   │   │   │   │   ├── GreetingController.java
+│   │   │   │   │   └── ServingWebContentApplication.java
+│   │   │   ├── resources/
+│   │   │   │   ├── static/
+│   │   │   │   │   └── index.html
+│   │   │   │   ├── templates/
+│   │   │   │   │   └── greeting.html
+│   │   │   │   └── application.properties
+│   │   ├── test/java/com/example/servingwebcontent/
+│   │   │   └── ServingWebContentApplicationTest.java
+│   │   ├── target/test-classes/...               # File biên dịch
+│
+├── Library/                                     # PHẦN 2: Java core (không dùng Spring)
+│   ├── src/
+│   │   ├── BorrowSlipManagement.java
+│   │   ├── BorrowSlipNotice.java
+│   │   ├── Check.java
+│   │   ├── LibrarySystem.java
+│   │   ├── UserBorrowed.java
+│   │   ├── UserBorrowedController.java
+│   │   └── UserManagement.java
+│   │
+│   ├── test/
+│   │   ├── BookSearchTestHelper.java
+│   │   ├── BookTest.java
+│   │   ├── BorrowSlipTest.java
+│   │   ├── TestBookManagement.java
+│   │   ├── TestBorrowSlipManagement.java
+│   │   ├── TestCheck.java
+│   │   ├── TestSequence.java
+│   │   ├── TestUser.java
+│   │   ├── testUserBorrowed.java
+│   │   └── UserTest.java
+│
+│   └── README.md                                # Mô tả phần Library core
+
+   
+
      
 
    
