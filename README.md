@@ -212,7 +212,21 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
  <b> VI. MÔ HÌNH VÀ CHỨC NĂNG </b>
   1. Mô hình hệ thống – Kiến trúc MVC (Model - View - Controller)
 
-Ứng dụng Quản lý thư viện sách số hóa được xây dựng theo mô hình MVC, gồm 3 thành phần chính:
+  Ứng dụng Quản lý thư viện sách số hóa được xây dựng theo mô hình MVC, gồm 3 thành phần chính:
+ 
+  +Model (Dữ liệu)
+  
+   Chứa các lớp đại diện cho các thực thể trong hệ thống:
+
+   User – người dùng (có thể là người mượn sách)
+
+   Book – sách trong thư viện
+
+   BorrowSlip – phiếu mượn sách (gồm ngày mượn, hạn trả, trạng thái)
+
+   BorrowSlipNotice – đối tượng trung gian hiển thị thông báo sắp đến hạn trả
+
+   Các lớp hỗ trợ như UserBorrowed, Check, LibrarySystem, UserManagement...
   
  
 
