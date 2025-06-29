@@ -6,8 +6,6 @@ GROUP 11
 
 2.Pham Khac Hung
 
-3.Nguyen Le Thu
-
 <b>Yêu cầu:</b>
  YÊU CẦU & MỤC TIÊU
  Giao diện: Java Spring Boot (Web)
