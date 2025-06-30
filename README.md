@@ -16,11 +16,11 @@ GROUP 11
 
  Hỗ trợ xử lý mượn/trả sách qua phiếu mượn (BorrowSlip).
 
-<b>I GIỚI THIỆU :</b>
+## I. GIỚI THIỆU
 
 Đây là ứng dụng Web giúp các thư viện nhỏ quản lý việc mượn – trả sách, quản lý người dùng và sách trong kho. Ứng dụng có giao diện web thân thiện, truy cập được qua trình duyệt.
 
-<b>II Chức năng chính:</b>
+## II Chức năng chính
 
  Quản lý sách
  
@@ -92,7 +92,8 @@ GROUP 11
 
 
 
- <b>III: CÔNG NGHỆ :</b>
+ ## III. CÔNG NGHỆ
+ 
  -CÔNG NGHỆ ĐÃ SỬ DỤNG
  
 Frontend (Giao diện):
@@ -129,7 +130,7 @@ Công cụ phát triển:
 
    - Quản lý biên dịch: Maven (dự phòng nếu mở rộng)
 
-   <b>IV. CẤU TRÚC DỰ ÁN :</b>
+## IV. CẤU TRÚC DỰ ÁN
    
    + Mô hình kiến trúc:
    
@@ -179,7 +180,7 @@ Công cụ phát triển:
      
      User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
 
-  <b>V. CẤU TRÚC THƯ MỤC:</b>
+  ## V. CẤU TRÚC THƯ MỤC
 
   ```
 OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
@@ -264,7 +265,7 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 │
 │   └── README.md                                # Mô tả phần Library core
 ```
- <b> VI. MÔ HÌNH VÀ CHỨC NĂNG </b>
+ ## VI. MÔ HÌNH VÀ CHỨC NĂNG
   1. Mô hình hệ thống – Kiến trúc MVC (Model - View - Controller)
 
   Ứng dụng Quản lý thư viện sách số hóa được xây dựng theo mô hình MVC, gồm 3 thành phần chính:
@@ -359,34 +360,34 @@ Cập nhật trạng thái sách thành “đang mượn”
 
 Thông báo thành công
 
-<b>VII. DIAGRAMS
+## VII. DIAGRAMS
 
-# Class diagram
+### Class diagram
 
 ![class-diagram](https://github.com/user-attachments/assets/49053191-c2db-4dc0-a189-e9761c291c26)
 
-# Activity Diagram
+### Activity Diagram
 
-User Management
+#### User Management
 
 ![User-activity-diagram](https://github.com/user-attachments/assets/e1c4d6eb-7892-498f-9762-31e437c9d96a)
 
-Book Management
+#### Book Management
 
 ![book-activity-diagram](https://github.com/user-attachments/assets/a98ce4ac-0fc7-428b-ae30-57df88d13b3a)
 
-BorrowSlip Management
+#### BorrowSlip Management
 
 ![borrowslip-activity-diagram](https://github.com/user-attachments/assets/6bd3d1fc-3183-462e-a726-a6654ebfd4ac)
 
 
-<b>VIII. LƯU ĐỒ THUẬT TOÁN CỦA CHỨC NĂNG CHÍNH</b>
+## VIII. LƯU ĐỒ THUẬT TOÁN CỦA CHỨC NĂNG CHÍNH
 
 
 ![HỆ THỐNG QUẢN LÝ THƯ VIỆN SÁCH SỐ HÓA](https://github.com/user-attachments/assets/2ee0f95e-200e-4c39-aaca-dac1b76aaf87)
 
-<b> IX.GIAO DIỆN </b>
-# Trang chủ
+## IX.GIAO DIỆN
+### Trang chủ
 
 ![image](https://github.com/user-attachments/assets/7a8ba723-e58b-47c1-b126-0d6c8167538b)
 
@@ -394,7 +395,7 @@ BorrowSlip Management
    
    - Hiển thị top 5 sách được mượn gần đây, top 5 sách được mượn nhiều nhất.
 
-# Quản lý Sách
+### Quản lý Sách
 
 ![image](https://github.com/user-attachments/assets/e9301b74-6c18-4890-abb6-6a73a1f84050)
 
@@ -415,7 +416,7 @@ BorrowSlip Management
 
     ![image](https://github.com/user-attachments/assets/5a728384-157a-4281-97b7-09b2510644f6)
 
- # Quản lý tài khoản người dùng
+ ### Quản lý tài khoản người dùng
 
  ![image](https://github.com/user-attachments/assets/e9c5864b-c8bc-4556-ad83-e4b61e7f5b21)
 
@@ -435,7 +436,7 @@ BorrowSlip Management
 
      ![image](https://github.com/user-attachments/assets/8f9ab02e-89cf-4439-a60b-c0ea7e379189)
 
- # Quản lý trả mượn sách
+ ### Quản lý trả mượn sách
  
 ![Screenshot 2025-06-30 170643](https://github.com/user-attachments/assets/d64a8fbf-ef20-456f-a549-029af58c6f87) 
 
@@ -449,7 +450,7 @@ BorrowSlip Management
   
   ![Screenshot 2025-06-30 173241](https://github.com/user-attachments/assets/019f862a-3fab-4d84-83ce-f5c919790aef)
   
- # Báo cáo số lượng mượn sách và danh sách đã trả sách ,danh sách mượn đã quá hạn
+ ### Báo cáo số lượng mượn sách và danh sách đã trả sách ,danh sách mượn đã quá hạn
 
  ![image](https://github.com/user-attachments/assets/595f24d9-2ae0-437e-91ca-2fe5e6fee1b4)
 
