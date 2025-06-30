@@ -7,7 +7,9 @@ GROUP 11
 2.Phạm Khắc Hùng
 
 <b>Yêu cầu:</b>
+
  YÊU CẦU & MỤC TIÊU
+ 
  Giao diện: Java Spring Boot (Web)
 
  Chức năng quản lý: Sách (Book) và Người dùng (User).
@@ -15,12 +17,14 @@ GROUP 11
  Hỗ trợ xử lý mượn/trả sách qua phiếu mượn (BorrowSlip).
 
 <b>I GIỚI THIỆU :</b>
+
 Đây là ứng dụng Web giúp các thư viện nhỏ quản lý việc mượn – trả sách, quản lý người dùng và sách trong kho. Ứng dụng có giao diện web thân thiện, truy cập được qua trình duyệt.
 
 <b>II Chức năng chính:</b>
 
  Quản lý sách
-  +Thêm, sửa, xóa Sách (Book)
+ 
+  + Thêm, sửa, xóa Sách (Book)
 
   + Liệt kê danh sách sách.
 
@@ -29,6 +33,7 @@ GROUP 11
   + Lọc danh sách theo chữ cái đầu của sách theo thứ tự từ A-Z và ngược lại.
 
   Quản lý người dùng
+  
    + Thêm, sửa, xóa Người dùng (User).
 
    + Tìm kiếm người dùng theo tên, email.
@@ -36,6 +41,7 @@ GROUP 11
    + Hiển thị danh sách người dùng theo ID, email...
 
   Quản lý phiếu mượn
+  
    + Gán sách cho người dùng thông qua phiếu mượn (BorrowSlip).
 
    + Có các chức năng thêm, sửa, xóa phiếu mượn.
@@ -84,7 +90,7 @@ GROUP 11
 
  <b>III: CÔNG NGHỆ :</b>
  -CÔNG NGHỆ ĐÃ SỬ DỤNG
-   +Frontend (Giao diện):
+   + Frontend (Giao diện):
 
     Sử dụng Spring Boot kết hợp với Thymeleaf làm template engine để sinh ra các trang HTML động.
 
@@ -92,7 +98,7 @@ GROUP 11
 
     Sử dụng các thư viện CSS như Tailwind CSS và Font Awesome
 
-   +Backend (Xử lý logic):
+   + Backend (Xử lý logic):
 
     Ngôn ngữ: Java 17.
 
@@ -102,7 +108,7 @@ GROUP 11
 
     Sử dụng Spring Web, Spring Data JPA.
 
-   +Lưu trữ dữ liệu:
+   + Lưu trữ dữ liệu:
 
     Kết nối với MySQL thông qua Hibernate/JPA.
     
@@ -110,7 +116,7 @@ GROUP 11
     
     Repository kế thừa JpaRepository để thao tác với CSDL.
 
-   +Công cụ phát triển:
+   + Công cụ phát triển:
 
     IDE: Visual Studio Code
 
@@ -120,7 +126,7 @@ GROUP 11
 
    <b>IV. CẤU TRÚC DỰ ÁN :</b>
    
-   +Mô hình kiến trúc:
+   + Mô hình kiến trúc:
    
     Hệ thống được tổ chức theo mô hình 3 lớp chuẩn:
 
@@ -154,17 +160,19 @@ GROUP 11
      
      - Cung cấp sẵn các phương thức như findAll(), save(), deleteById(),... để thao tác với cơ sở dữ liệu mà không cần viết SQL thủ công.
 
-   +Các thành phần chính trong project:
-| Thành phần     | Vai trò                                                                 |
-| -------------- | ----------------------------------------------------------------------- |
-| `Book`         | Đại diện cho sách: tiêu đề, tác giả, nhà xuất bản, số trang, tồn kho    |
-| `User`         | Người dùng hệ thống: tên, email, mật khẩu                               |
-| `BorrowSlip`   | Phiếu mượn: gán sách cho người dùng, ngày mượn, hạn trả, trạng thái trả |
+   + Các thành phần chính trong project:
 
-   +Quy trình xử lý:
-     Ví dụ tạo phiếu mượn:
+    | Thành phần     | Vai trò                                                                 |
+    | -------------- | ----------------------------------------------------------------------- |
+    | `Book`         | Đại diện cho sách: tiêu đề, tác giả, nhà xuất bản, số trang, tồn kho    |
+    | `User`         | Người dùng hệ thống: tên, email, mật khẩu                               |
+    | `BorrowSlip`   | Phiếu mượn: gán sách cho người dùng, ngày mượn, hạn trả, trạng thái trả |
+
+   + Quy trình xử lý:
+   
+         Ví dụ tạo phiếu mượn:
      
-User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
+         User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
 
   <b>V. CẤU TRÚC THƯ MỤC:</b>
 
