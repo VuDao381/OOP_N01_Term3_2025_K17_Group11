@@ -18,7 +18,54 @@
 
 ## I. GIỚI THIỆU
 
-Đây là ứng dụng Web giúp các thư viện nhỏ quản lý việc mượn – trả sách, quản lý người dùng và sách trong kho. Ứng dụng có giao diện web thân thiện, truy cập được qua trình duyệt.
+### 1. Tên ứng dụng: Ứng dụng Quản lý Thư viện
+
+### 2. Lý do chọn đề tài
+
+Trong thời đại công nghệ thông tin phát triển mạnh mẽ, việc số hóa dữ liệu và tự động hóa các quy trình quản lý là xu hướng tất yếu trong mọi lĩnh vực, đặc biệt là giáo dục và văn hóa đọc. Các thư viện 
+
+truyền thống hiện vẫn gặp nhiều khó khăn trong việc quản lý sách, người dùng và quá trình mượn/trả, đặc biệt khi còn sử dụng hình thức ghi chép thủ công hoặc phần mềm cục bộ lỗi thời.
+
+Trước thực trạng đó, nhóm chúng em quyết định lựa chọn đề tài "Xây dựng ứng dụng Quản lý Thư viện Sách Số Hóa" nhằm thiết kế một hệ thống đơn giản, hiệu quả, có khả năng mở rộng, giúp số hóa việc quản lý 
+
+thư viện theo hướng hiện đại và tự động hóa cao hơn. Đề tài không chỉ giúp nhóm vận dụng toàn diện kiến thức lập trình hướng đối tượng (OOP) mà còn mang ý nghĩa thực tiễn cao, có thể triển khai tại các 
+
+trường học, trung tâm hoặc thư viện địa phương.
+
+### 3. Mục tiêu của dự án
+
+Ứng dụng được xây dựng với các mục tiêu cụ thể sau:
+
++	Quản lý sách: Cho phép thêm, sửa, xóa sách, tìm kiếm theo tiêu chí (tác giả, nhà xuất bản), liệt kê danh sách sách hiện có.
+
++	Quản lý người dùng thư viện: Ghi nhận thông tin người dùng, hỗ trợ cập nhật hoặc xóa khi cần thiết.
+
++	Tạo và quản lý phiếu mượn sách: Gán sách cho người dùng mượn thông qua phiếu mượn, quản lý tình trạng mượn/trả, hạn trả.
+
++	Thông báo quá hạn: Tự động kiểm tra và hiển thị danh sách sách mượn đã quá hạn hoặc sắp đến hạn trả.
+
++	Lưu trữ dữ liệu: Thực hiện đọc/ghi dữ liệu lên cơ sở dữ liệu.
+
++	Áp dụng nguyên lý lập trình hướng đối tượng: Tổ chức các lớp rõ ràng, mở rộng linh hoạt theo các nguyên lý đóng gói, kế thừa, đa hình và trừu tượng.
+
+### 4. Bối cảnh và tầm nhìn
+
+Nhiều thư viện ở trường học, trung tâm học tập cộng đồng hay đơn vị địa phương còn gặp khó khăn trong việc quản lý kho sách và người đọc. Việc ghi chép thủ công dễ xảy ra thất thoát, thiếu chính xác và 
+
+không theo kịp nhu cầu truy xuất dữ liệu nhanh.
+
+Hệ thống Quản lý Thư viện Sách Số Hóa được phát triển như một giải pháp thiết thực, đơn giản nhưng hiệu quả, giúp các cán bộ thư viện có thể:
+
++	Quản lý đầu sách và tình trạng kho rõ ràng.
+
++	Theo dõi chính xác người mượn, thời gian mượn và tình trạng trả sách.
+
++	Cảnh báo các phiếu mượn đã quá hạn.
+
++	Dễ dàng truy xuất dữ liệu khi cần thống kê, báo cáo.
+
+Đây là ứng dụng Web giúp các thư viện nhỏ quản lí việc mượn – trả sách, quản lí người dùng và sách trong kho. Ứng dụng có giao diện web thân thiện, dễ sử dụng và thao tác, truy cập được qua trình duyệt.
+
 
 ## II Chức năng chính
 
