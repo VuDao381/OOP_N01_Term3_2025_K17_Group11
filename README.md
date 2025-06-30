@@ -354,7 +354,28 @@ Cập nhật trạng thái sách thành “đang mượn”
 
 Thông báo thành công
 
-<b>VII. LƯU ĐỒ THUẬT TOÁN CỦA CHỨC NĂNG CHÍNH</b>
+<b>VII. DIAGRAMS
+
+# Class diagram
+
+![class-diagram](https://github.com/user-attachments/assets/49053191-c2db-4dc0-a189-e9761c291c26)
+
+# Activity Diagram
+
+User Management
+
+![User-activity-diagram](https://github.com/user-attachments/assets/e1c4d6eb-7892-498f-9762-31e437c9d96a)
+
+Book Management
+
+![book-activity-diagram](https://github.com/user-attachments/assets/a98ce4ac-0fc7-428b-ae30-57df88d13b3a)
+
+BorrowSlip Management
+
+![borrowslip-activity-diagram](https://github.com/user-attachments/assets/6bd3d1fc-3183-462e-a726-a6654ebfd4ac)
+
+
+<b>VIII. LƯU ĐỒ THUẬT TOÁN CỦA CHỨC NĂNG CHÍNH</b>
 
 
 ![HỆ THỐNG QUẢN LÝ THƯ VIỆN SÁCH SỐ                                   HÓA](https://github.com/user-attachments/assets/2ee0f95e-200e-4c39-aaca-dac1b76aaf87)
