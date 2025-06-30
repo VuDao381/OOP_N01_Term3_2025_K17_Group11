@@ -64,14 +64,15 @@ GROUP 11
 
    -BorrowSlip (Phiếu mượn)
 
-| Trường       | Kiểu dữ liệu | Mô tả ngắn      |
-| ------------ | ------------ | --------------- |
-| `bookTitle`  | `String`     | Tên sách        |
-| `UID`        | `int`        | ID người mượn   |
-| `borrowDate` | `LocalDate`  | Ngày mượn       |
-| `dueDate`    | `LocalDate`  | Hạn trả         |
-| `isReturned` | `boolean`    | Đã trả hay chưa |
-
+| Trường       | Kiểu dữ liệu          | Mô tả                                                        |
+| ------------ | --------------------- | ------------------------------------------------------------ |
+| `id`         | `Long`                | Mã phiếu mượn                                                |
+| `user`       | `User`                | Đối tượng người dùng mượn sách (liên kết ManyToOne đến User) |
+| `book`       | `Book`                | Đối tượng sách đã được mượn (liên kết ManyToOne đến Book)    |
+| `borrowDate` | `LocalDate`           | Ngày mượn sách                                               |
+| `dueDate`    | `LocalDate`           | Ngày phải trả sách (Hạn cuối cùng)                           |
+| `isReturned` | `boolean`             | Đã trả hay chưa (`true` nếu đã trả, `false` nếu chưa)        |
+| `returnDate` | `LocalDate`(nullable) | Ngày thực tế đã trả sách (có thể null nếu chưa trả)          |
 
 
  <b>III: CÔNG NGHỆ :</b>
