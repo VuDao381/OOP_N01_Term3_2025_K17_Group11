@@ -385,25 +385,25 @@ BorrowSlip Management
 
 ![image](https://github.com/user-attachments/assets/7a8ba723-e58b-47c1-b126-0d6c8167538b)
 
- - Hiển thị tổng số sách, tổng số người dùng, tổng số sách đã mượn, tổng số sách đã quá hạn trả.
-
- - Hiển thị top 5 sách được mượn gần đây, top 5 sách được mượn nhiều nhất.
+    - Hiển thị tổng số sách, tổng số người dùng, tổng số sách đã mượn, tổng số sách đã quá hạn trả.
+   
+    - Hiển thị top 5 sách được mượn gần đây, top 5 sách được mượn nhiều nhất.
 
 # Quản lý Sách
 
 ![image](https://github.com/user-attachments/assets/e9301b74-6c18-4890-abb6-6a73a1f84050)
 
- - Hiển danh sách Book với các cột ID, Title, Author, Publisher, Pages, Quantity. Cột Action để sửa hoặc xóa Book.
-
- - Cung cấp thanh tìm kiếm. Có thể tìm kiếm Book theo Title, Author, Publisher.
+     - Hiển danh sách Book với các cột ID, Title, Author, Publisher, Pages, Quantity. Cột Action để sửa hoặc xóa Book.
+    
+     - Cung cấp thanh tìm kiếm. Có thể tìm kiếm Book theo Title, Author, Publisher.
 
   + Tạo phiếu mượn sách :
 
     ![image](https://github.com/user-attachments/assets/06580236-501c-4e04-ad5b-93e909337ace)
 
-    - Nhấn "Add New Book" để mở form tạo mới sách.
+          - Nhấn "Add New Book" để mở form tạo mới sách.
    
-    - Nhấn "Save" để lưu, "Cancel" để thoát.
+          - Nhấn "Save" để lưu, "Cancel" để thoát.
 
   
   + Phiếu mượn sách tạo thành công :
@@ -414,17 +414,17 @@ BorrowSlip Management
 
  ![image](https://github.com/user-attachments/assets/e9c5864b-c8bc-4556-ad83-e4b61e7f5b21)
 
- - Hiển danh sách User với các cột ID, Name, Email, Password. Cột Action để sửa hoặc xóa User.
+       - Hiển danh sách User với các cột ID, Name, Email, Password. Cột Action để sửa hoặc xóa User.
 
- - Cung cấp thanh tìm kiếm. Có thể tìm kiếm User theo Name, Email.
+       - Cung cấp thanh tìm kiếm. Có thể tìm kiếm User theo Name, Email.
 
    + Tạo tài khoản người dùng :
 
      ![image](https://github.com/user-attachments/assets/3bc684e0-c0c5-4f7f-a5bf-889d80070329)
 
-     - Nhấn "Add New User" để mở form tạo mới tài khoản người.
+         - Nhấn "Add New User" để mở form tạo mới tài khoản người.
    
-     - Nhấn "Save" để lưu, "Cancel" để thoát.
+         - Nhấn "Save" để lưu, "Cancel" để thoát.
 
    + Tạo tài khoản thành công :
 
@@ -434,21 +434,22 @@ BorrowSlip Management
  
 ![Screenshot 2025-06-30 170643](https://github.com/user-attachments/assets/d64a8fbf-ef20-456f-a549-029af58c6f87) 
 
- - Hiển danh sách  với các cột Slip ID, User, Book, Borrow Date, Due Date. Cột Action để sửa, xóa phiếu mượn hoặc đánh dấu là đã trả sách.
+     - Hiển danh sách  với các cột Slip ID, User, Book, Borrow Date, Due Date. Cột Action để sửa, xóa phiếu mượn hoặc đánh dấu là đã trả sách.
 
- - Cung cấp thanh tìm kiếm. Có thể tìm kiếm BorrowSlip theo User, Book.
+     - Cung cấp thanh tìm kiếm. Có thể tìm kiếm BorrowSlip theo User, Book.
 
- - Có thể lọc danh sách theo tình trạng (Status), lọc danh sách theo ngày.
+     - Có thể lọc danh sách theo tình trạng (Status), lọc danh sách theo ngày.
 
+   + Tạo phiếu mượn mới:
+  
+  ![Screenshot 2025-06-30 173241](https://github.com/user-attachments/assets/019f862a-3fab-4d84-83ce-f5c919790aef)
+  
  # Báo cáo số lượng mượn sách và danh sách đã trả sách ,danh sách mượn đã quá hạn
 
  ![image](https://github.com/user-attachments/assets/595f24d9-2ae0-437e-91ca-2fe5e6fee1b4)
 
  - Hiển thị tổng số sách đã mượn, đã trả, đã quá hạn trả theo tuần, tháng, năm.
 
-   + Tạo phiếu mượn mới:
-  
-  ![Screenshot 2025-06-30 173241](https://github.com/user-attachments/assets/019f862a-3fab-4d84-83ce-f5c919790aef)
 
  # Link demo sản phẩm :
 
