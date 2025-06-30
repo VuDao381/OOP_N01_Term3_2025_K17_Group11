@@ -404,42 +404,42 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
     
    - Cung cấp thanh tìm kiếm. Có thể tìm kiếm Book theo Title, Author, Publisher.
 
-  + Tạo phiếu mượn sách :
+ #### Tạo phiếu mượn sách :
 
-    ![image](https://github.com/user-attachments/assets/06580236-501c-4e04-ad5b-93e909337ace)
+![image](https://github.com/user-attachments/assets/06580236-501c-4e04-ad5b-93e909337ace)
 
-    - Nhấn "Add New Book" để mở form tạo mới sách.
+   - Nhấn "Add New Book" để mở form tạo mới sách.
    
-    - Nhấn "Save" để lưu, "Cancel" để thoát.
+   - Nhấn "Save" để lưu, "Cancel" để thoát.
 
   
-  + Phiếu mượn sách tạo thành công :
+ #### Phiếu mượn sách tạo thành công :
 
-    ![image](https://github.com/user-attachments/assets/5a728384-157a-4281-97b7-09b2510644f6)
+![image](https://github.com/user-attachments/assets/5a728384-157a-4281-97b7-09b2510644f6)
 
  ### Quản lý tài khoản người dùng
 
- ![image](https://github.com/user-attachments/assets/e9c5864b-c8bc-4556-ad83-e4b61e7f5b21)
+![image](https://github.com/user-attachments/assets/e9c5864b-c8bc-4556-ad83-e4b61e7f5b21)
 
    - Hiển danh sách User với các cột ID, Name, Email, Password. Cột Action để sửa hoặc xóa User.
 
    - Cung cấp thanh tìm kiếm. Có thể tìm kiếm User theo Name, Email.
 
-   + Tạo tài khoản người dùng :
+  #### Tạo tài khoản người dùng :
 
-     ![image](https://github.com/user-attachments/assets/3bc684e0-c0c5-4f7f-a5bf-889d80070329)
+ ![image](https://github.com/user-attachments/assets/3bc684e0-c0c5-4f7f-a5bf-889d80070329)
 
-     - Nhấn "Add New User" để mở form tạo mới tài khoản người.
+   - Nhấn "Add New User" để mở form tạo mới tài khoản người.
    
-     - Nhấn "Save" để lưu, "Cancel" để thoát.
+   - Nhấn "Save" để lưu, "Cancel" để thoát.
 
-   + Tạo tài khoản thành công :
+  #### Tạo tài khoản thành công :
 
-     ![image](https://github.com/user-attachments/assets/8f9ab02e-89cf-4439-a60b-c0ea7e379189)
+  ![image](https://github.com/user-attachments/assets/8f9ab02e-89cf-4439-a60b-c0ea7e379189)
 
- ### Quản lý trả mượn sách
+  ### Quản lý trả mượn sách
  
-![Screenshot 2025-06-30 170643](https://github.com/user-attachments/assets/d64a8fbf-ef20-456f-a549-029af58c6f87) 
+  ![Screenshot 2025-06-30 170643](https://github.com/user-attachments/assets/d64a8fbf-ef20-456f-a549-029af58c6f87) 
 
    - Hiển danh sách  với các cột Slip ID, User, Book, Borrow Date, Due Date. Cột Action để sửa, xóa phiếu mượn hoặc đánh dấu là đã trả sách.
 
@@ -447,15 +447,15 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    - Có thể lọc danh sách theo tình trạng (Status), lọc danh sách theo ngày.
 
-   + Tạo phiếu mượn mới:
+   #### Tạo phiếu mượn mới:
   
   ![Screenshot 2025-06-30 173241](https://github.com/user-attachments/assets/019f862a-3fab-4d84-83ce-f5c919790aef)
   
- ### Báo cáo số lượng mượn sách và danh sách đã trả sách ,danh sách mượn đã quá hạn
+   ### Báo cáo số lượng mượn sách và danh sách đã trả sách ,danh sách mượn đã quá hạn
 
- ![image](https://github.com/user-attachments/assets/595f24d9-2ae0-437e-91ca-2fe5e6fee1b4)
+  ![image](https://github.com/user-attachments/assets/595f24d9-2ae0-437e-91ca-2fe5e6fee1b4)
 
- - Hiển thị tổng số sách đã mượn, đã trả, đã quá hạn trả theo tuần, tháng, năm.
+   - Hiển thị tổng số sách đã mượn, đã trả, đã quá hạn trả theo tuần, tháng, năm.
 
 
  # Link demo sản phẩm :
