@@ -267,7 +267,7 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 ```
  ## VI. MÔ HÌNH VÀ CHỨC NĂNG
  
- 1. Mô hình hệ thống – Kiến trúc MVC (Model - View - Controller)
+### 1. Mô hình hệ thống – Kiến trúc MVC (Model - View - Controller)
     
 Hệ thống Quản lý Thư viện Sách số được xây dựng theo kiến trúc 3 lớp MVC chuẩn của Spring Boot:
 
@@ -275,13 +275,13 @@ Hệ thống Quản lý Thư viện Sách số được xây dựng theo kiến 
 
 Chứa các lớp mô hình ánh xạ với bảng dữ liệu qua JPA/Hibernate:
 
-User – đại diện người dùng (người mượn sách): id, username, useremail, userpassword.
++ User – đại diện người dùng (người mượn sách): id, username, useremail, userpassword.
 
-Book – đại diện sách trong thư viện: id, title, author, publisher, numPages, quantity.
++ Book – đại diện sách trong thư viện: id, title, author, publisher, numPages, quantity.
 
-BorrowSlip – phiếu mượn sách: id, user, book, borrowDate, dueDate, isReturned, returnDate.
++ BorrowSlip – phiếu mượn sách: id, user, book, borrowDate, dueDate, isReturned, returnDate.
 
-Các class sử dụng annotation @Entity, @Table, và ánh xạ @ManyToOne để liên kết giữa Book, User, BorrowSlip.
++ Các class sử dụng annotation @Entity, @Table, và ánh xạ @ManyToOne để liên kết giữa Book, User, BorrowSlip.
 
 #### View (Giao diện)
 
@@ -307,71 +307,71 @@ Các controller sử dụng annotation REST như @GetMapping, @PostMapping, @Put
 
 BookService, UserService, BorrowSlipService xử lý logic nghiệp vụ như:
 
-Lưu/xoá/sửa dữ liệu
++ Lưu/xoá/sửa dữ liệu
 
-Tìm kiếm, lọc, thống kê sách mượn nhiều nhất
++ Tìm kiếm, lọc, thống kê sách mượn nhiều nhất
 
-Kiểm tra quá hạn, đánh dấu đã trả
++ Kiểm tra quá hạn, đánh dấu đã trả
 
-Phân tích phiếu mượn trong khoảng thời gian
++ Phân tích phiếu mượn trong khoảng thời gian
 
 #### Repository Layer (Truy vấn CSDL)
 
-Sử dụng Spring Data JPA:
-
-BookRepository, UserRepository, BorrowSlipRepository
+Sử dụng Spring Data JPA: BookRepository, UserRepository, BorrowSlipRepository
 
 Có các phương thức tuỳ chỉnh như:
 
-findByTitleContainingIgnoreCase()
++ findByTitleContainingIgnoreCase()
 
-countOverdueBetween()
++ countOverdueBetween()
 
-findTopBorrowedBooks() dùng @Query
++ findTopBorrowedBooks() dùng @Query
 
-2. Chức năng hệ thống (chia theo từng mô-đun)
+### 2. Chức năng hệ thống (chia theo từng mô-đun)
    
 #### Sách (Book)
-Thêm, cập nhật, xoá sách (BookController, BookService)
 
-Tìm sách theo tiêu đề, tác giả, nhà xuất bản
++ Thêm, cập nhật, xoá sách (BookController, BookService)
 
-Thống kê sách được mượn nhiều nhất
++ Tìm sách theo tiêu đề, tác giả, nhà xuất bản
 
-Tìm kiếm toàn cục theo từ khoá
++ Thống kê sách được mượn nhiều nhất
+
++ Tìm kiếm toàn cục theo từ khoá
 
 #### Phiếu mượn (BorrowSlip)
-Tạo phiếu mượn mới từ User + Book + ngày mượn + hạn trả
 
-Cập nhật trạng thái isReturned, returnDate
++ Tạo phiếu mượn mới từ User + Book + ngày mượn + hạn trả
 
-Đánh dấu trả sách
++ Cập nhật trạng thái isReturned, returnDate
 
-Thống kê sách quá hạn, gần đến hạn (dựa vào dueDate)
++ Đánh dấu trả sách
 
-Hiển thị 5 phiếu mượn mới nhất
++ Thống kê sách quá hạn, gần đến hạn (dựa vào dueDate)
 
-Thống kê sách mượn nhiều nhất
++ Hiển thị 5 phiếu mượn mới nhất
+
++ Thống kê sách mượn nhiều nhất
 
 #### Người dùng (User)
 
-Thêm, cập nhật, xoá người dùng
++ Thêm, cập nhật, xoá người dùng
 
-Tìm người dùng theo ID, username, email
++ Tìm người dùng theo ID, username, email
 
-Thống kê tổng số người dùng
++ Thống kê tổng số người dùng
 
 #### Thống kê & báo cáo
 
-Số lượng sách đang được mượn
++ Số lượng sách đang được mượn
 
-Số sách quá hạn chưa trả
++ Số sách quá hạn chưa trả
 
-Sách mượn phổ biến nhất
++ Sách mượn phổ biến nhất
 
-Lượt mượn sách trong từng khoảng thời gian
++ Lượt mượn sách trong từng khoảng thời gian
 
-3. Luồng xử lý chức năng tiêu biểu – Mượn sách
+### 3. Luồng xử lý chức năng tiêu biểu – Mượn sách
 
 Người dùng gửi yêu cầu mượn sách qua frontend.
 
@@ -379,17 +379,17 @@ Backend nhận thông tin gồm: userId, bookId, borrowDate, dueDate.
 
 BorrowSlipController kiểm tra:
 
-User và Book có tồn tại?
++ User và Book có tồn tại?
 
-Sách còn tồn kho?
++ Sách còn tồn kho?
 
-Nếu hợp lệ:
+  - Nếu hợp lệ:
 
-Tạo mới BorrowSlip, gán user và book
+    + Tạo mới BorrowSlip, gán user và book
 
-Lưu thông tin vào cơ sở dữ liệu
+    + Lưu thông tin vào cơ sở dữ liệu
 
-Gửi phản hồi thành công về frontend.
+    + Gửi phản hồi thành công về frontend.
 
 ## VII. DIAGRAMS
 
