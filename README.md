@@ -1,12 +1,12 @@
 # QUẢN LÝ THƯ VIỆN SÁCH SỐ HÓA
 
-GROUP 11
+## GROUP 11
 
 1.Đào Anh Vũ
 
 2.Phạm Khắc Hùng
 
-<b>Yêu cầu:</b>
+## Yêu cầu
 
  YÊU CẦU & MỤC TIÊU
  
@@ -94,7 +94,7 @@ GROUP 11
 
  ## III. CÔNG NGHỆ
  
- -CÔNG NGHỆ ĐÃ SỬ DỤNG
+### CÔNG NGHỆ ĐÃ SỬ DỤNG
  
 Frontend (Giao diện):
 
@@ -132,7 +132,7 @@ Công cụ phát triển:
 
 ## IV. CẤU TRÚC DỰ ÁN
    
-   + Mô hình kiến trúc:
+  ### Mô hình kiến trúc:
    
    Hệ thống được tổ chức theo mô hình 3 lớp chuẩn:
 
@@ -166,7 +166,7 @@ Công cụ phát triển:
      
    - Cung cấp sẵn các phương thức như findAll(), save(), deleteById(),... để thao tác với cơ sở dữ liệu mà không cần viết SQL thủ công.
 
-   + Các thành phần chính trong project:
+  ### Các thành phần chính trong project:
 
    | Thành phần     | Vai trò                                                                 |
    | -------------- | ----------------------------------------------------------------------- |
@@ -174,11 +174,11 @@ Công cụ phát triển:
    | `User`         | Người dùng hệ thống: tên, email, mật khẩu                               |
    | `BorrowSlip`   | Phiếu mượn: gán sách cho người dùng, ngày mượn, hạn trả, trạng thái trả |
 
-   + Quy trình xử lý:
+   ### Quy trình xử lý:
    
-     Ví dụ tạo phiếu mượn:
+   Ví dụ tạo phiếu mượn:
      
-     User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
+   User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
 
   ## V. CẤU TRÚC THƯ MỤC
 
@@ -270,7 +270,7 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
   Ứng dụng Quản lý thư viện sách số hóa được xây dựng theo mô hình MVC, gồm 3 thành phần chính:
  
-  +Model (Dữ liệu)
+  + Model (Dữ liệu)
   
    Chứa các lớp đại diện cho các thực thể trong hệ thống:
 
@@ -281,7 +281,8 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
    BorrowSlip – phiếu mượn sách (gồm ngày mượn, hạn trả, trạng thái)
 
 
-+View (Giao diện)
+  + View (Giao diện)
+
    Sử dụng Thymeleaf để hiển thị các trang HTML động, ví dụ:
 
    Trang hiển thị danh sách sách đã mượn (user-borrowed.html)
@@ -290,7 +291,7 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    (Có thể mở rộng thêm: trang thêm user, sách, quản lý phiếu mượn...)
  
-+Controller (Điều hướng và xử lý)
+  + Controller (Điều hướng và xử lý)
 
    Các controller tiếp nhận yêu cầu từ người dùng qua URL, xử lý logic và trả dữ liệu về View:
 
@@ -298,9 +299,9 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    Các lớp UserBorrowed, LibrarySystem hoạt động như Service hỗ trợ xử lý logic trung gian
 
- 2. Chức năng hệ thống (chia theo từng mô-đun)
+  2. Chức năng hệ thống (chia theo từng mô-đun)
   
-+Sách (Book)
+  + Sách (Book)
 
    Thêm sách mới vào hệ thống (LibrarySystem.addBook())
 
@@ -310,7 +311,7 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    Tìm sách theo tiêu đề (Check.findBookByTitle())
 
- +Phiếu mượn (BorrowSlip)
+   + Phiếu mượn (BorrowSlip)
 
    Tạo phiếu mượn sách (LibrarySystem.MuonSach())
 
@@ -320,7 +321,7 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    Lưu danh sách phiếu mượn (UserBorrowed.addBorrowSlip())
 
- +Người dùng (User)
+  + Người dùng (User)
    
    Thêm, sửa, xóa người dùng (UserManagement)
 
@@ -328,7 +329,7 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
    Hiển thị sách đã mượn theo người dùng (UserBorrowed.displayUserBorrowedBooks())
    
- +Thống kê và thông báo
+  + Thống kê và thông báo
 
    Thống kê số sách sắp đến hạn trả (giao diện và dòng lệnh)
 
@@ -340,25 +341,25 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 
      Ví dụ: Mượn sách
 
-Người dùng được thêm hoặc đã tồn tại
+   Người dùng được thêm hoặc đã tồn tại
 
-Người dùng chọn sách muốn mượn (phải còn tồn kho)
+   Người dùng chọn sách muốn mượn (phải còn tồn kho)
 
-Nhập ngày mượn và hạn trả
+   Nhập ngày mượn và hạn trả
 
-Gọi MuonSach(user, bookTitle, borrowDate, dueDate)
+   Gọi MuonSach(user, bookTitle, borrowDate, dueDate)
 
-Hệ thống kiểm tra tình trạng sách:
+   Hệ thống kiểm tra tình trạng sách:
 
-Nếu sách không tồn tại → thông báo lỗi
+   Nếu sách không tồn tại → thông báo lỗi
 
-Nếu sách đã bị mượn → từ chối mượn
+   Nếu sách đã bị mượn → từ chối mượn
 
-Nếu hợp lệ → tạo BorrowSlip, thêm vào danh sách
+   Nếu hợp lệ → tạo BorrowSlip, thêm vào danh sách
 
-Cập nhật trạng thái sách thành “đang mượn”
+   Cập nhật trạng thái sách thành “đang mượn”
 
-Thông báo thành công
+   Thông báo thành công
 
 ## VII. DIAGRAMS
 
