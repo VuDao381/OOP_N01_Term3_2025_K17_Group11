@@ -486,10 +486,3 @@ BorrowSlipController kiểm tra:
   ![image](https://github.com/user-attachments/assets/595f24d9-2ae0-437e-91ca-2fe5e6fee1b4)
 
    - Hiển thị tổng số sách đã mượn, đã trả, đã quá hạn trả theo tuần, tháng, năm.
-
-
- # Link demo sản phẩm :
-
-  https://drive.google.com/file/d/1-E8mv4zfpATaSNrq6tVHuNXGUsdlmYEN/view?usp=sharing
-
-  
