@@ -356,7 +356,7 @@ Thông báo thành công
 
  # Link demo sản phẩm :
 
-  ![image](https://drive.google.com/file/d/1-E8mv4zfpATaSNrq6tVHuNXGUsdlmYEN/view?usp=sharing)
+  https://drive.google.com/file/d/1-E8mv4zfpATaSNrq6tVHuNXGUsdlmYEN/view?usp=sharing
 
 
 
