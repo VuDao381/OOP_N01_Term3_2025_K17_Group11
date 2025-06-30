@@ -378,9 +378,9 @@ BorrowSlip Management
 <b>VIII. LƯU ĐỒ THUẬT TOÁN CỦA CHỨC NĂNG CHÍNH</b>
 
 
-![HỆ THỐNG QUẢN LÝ THƯ VIỆN SÁCH SỐ                                   HÓA](https://github.com/user-attachments/assets/2ee0f95e-200e-4c39-aaca-dac1b76aaf87)
+![HỆ THỐNG QUẢN LÝ THƯ VIỆN SÁCH SỐ HÓA](https://github.com/user-attachments/assets/2ee0f95e-200e-4c39-aaca-dac1b76aaf87)
 
-<b> VIII.GIAO DIỆN </b>
+<b> IX.GIAO DIỆN </b>
 # Trang chủ
 
 ![image](https://github.com/user-attachments/assets/7a8ba723-e58b-47c1-b126-0d6c8167538b)
@@ -443,6 +443,12 @@ BorrowSlip Management
  # Báo cáo số lượng mượn sách và danh sách đã trả sách ,danh sách mượn đã quá hạn
 
  ![image](https://github.com/user-attachments/assets/595f24d9-2ae0-437e-91ca-2fe5e6fee1b4)
+
+ - Hiển thị tổng số sách đã mượn, đã trả, đã quá hạn trả theo tuần, tháng, năm.
+
+   + Tạo phiếu mượn mới:
+  
+  ![Screenshot 2025-06-30 173241](https://github.com/user-attachments/assets/019f862a-3fab-4d84-83ce-f5c919790aef)
 
  # Link demo sản phẩm :
 
