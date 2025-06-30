@@ -24,17 +24,23 @@ GROUP 11
 
   + Liệt kê danh sách sách.
 
-  + Tìm kiếm theo tên, tác giả, nhà xuất bản.
+  + Tìm kiếm theo tiêu đề sách, tác giả, nhà xuất bản.
 
   + Lọc danh sách theo chữ cái đầu của sách theo thứ tự từ A-Z và ngược lại.
 
   Quản lý người dùng
-   +Thêm, sửa, xóa Người dùng (User).
+   + Thêm, sửa, xóa Người dùng (User).
 
-   +Hiển thị danh sách người dùng theo ID, email...
+   + Tìm kiếm người dùng theo tên, email.
+
+   + Hiển thị danh sách người dùng theo ID, email...
 
   Quản lý phiếu mượn
    + Gán sách cho người dùng thông qua phiếu mượn (BorrowSlip).
+
+   + Có các chức năng thêm, sửa, xóa phiếu mượn.
+
+   + Tìm kiếm phiếu mượn theo tên người dùng, tiêu đề của sách.
    
    + Cho phép mượn, nhập thủ công ngày mượn, hạn trả. Đối với những sách đang mượn hoặc quá hạn trả cho phép cập nhật bằng cách đánh dấu đã trả.
 
@@ -75,25 +81,34 @@ GROUP 11
 | `returnDate` | `LocalDate`(nullable) | Ngày thực tế đã trả sách (có thể null nếu chưa trả)          |
 
 
+
  <b>III: CÔNG NGHỆ :</b>
  -CÔNG NGHỆ ĐÃ SỬ DỤNG
    +Frontend (Giao diện):
 
-    Sử dụng Spring Boot kết hợp với công cụ template engine Thymeleaf để dựng giao diện động (HTML động).
+    Sử dụng Spring Boot kết hợp với Thymeleaf làm template engine để sinh ra các trang HTML động.
 
-    Cho phép hiển thị danh sách sách, người dùng và phiếu mượn trực tiếp trên trình duyệt.
+    Các trang giao diện như danh sách sách, người dùng, phiếu mượn được hiển thị trực tiếp trên trình duyệt qua các file .html nằm trong thư mục resources/templates/.
+
+    Sử dụng các thư viện CSS như Tailwind CSS và Font Awesome
 
    +Backend (Xử lý logic):
 
-    Viết bằng Java 17.
+    Ngôn ngữ: Java 17.
 
-    Kiến trúc mô hình phân lớp MVC (Model - View - Controller).
+    Framework: Spring Boot 3.5.3.
+
+    Kiến trúc: MVC gồm Controller, Service, Repository, Model, DTO.
+
+    Sử dụng Spring Web, Spring Data JPA.
 
    +Lưu trữ dữ liệu:
 
-    Hiện tại dữ liệu được lưu trong bộ nhớ (RAM) bằng Collection như List, Map.
-
-    Định hướng tương lai mở rộng với lưu trữ file nhị phân hoặc kết nối MySQL/SQLite.
+    Kết nối với MySQL thông qua Hibernate/JPA.
+    
+    Các entity ánh xạ với bảng dữ liệu.
+    
+    Repository kế thừa JpaRepository để thao tác với CSDL.
 
    +Công cụ phát triển:
 
@@ -109,15 +124,35 @@ GROUP 11
    
     Hệ thống được tổ chức theo mô hình 3 lớp chuẩn:
 
-    [Client Layer]: HTML hiển thị thông qua Thymeleaf.
+    [Client Layer]: 
+    
+     - Giao diện người dùng được xây dựng bằng Thymeleaf, nhúng dữ liệu vào các file .html.
 
-    [Controller Layer]: Xử lý yêu cầu từ người dùng gửi lên (HTTP Request).
+    [Controller Layer]:
 
-    [Service Layer]: Xử lý logic nghiệp vụ: gán sách cho user, kiểm tra quá hạn, validate nhập sai,...
+     - Nhận và xử lý HTTP request từ phía client.
+     
+     - Gọi đến các service để xử lý logic nghiệp vụ.
 
-    [Model Layer]: Gồm các lớp Book, User, BorrowSlip, UserBorrowed.
+     - Trả kết quả về client (giao diện HTML hoặc redirect).
 
-    (Repository Layer): Dự kiến mở rộng dùng để lưu trữ với CSDL.
+    [Service Layer]:
+
+     - Các lớp như BookService, UserService, BorrowSlipService.
+
+     - Tách riêng nghiệp vụ ra khỏi controller để dễ bảo trì và kiểm thử.
+
+    [Model Layer]:
+    
+     - Các lớp Book, User, BorrowSlip được đánh dấu bằng @Entity, đại diện cho bảng dữ liệu trong MySQL.
+
+     - Ánh xạ quan hệ giữa các bảng bằng JPA (@ManyToOne).
+
+    (Repository Layer):
+    
+     - Gồm các interface BookRepository, UserRepository, BorrowSlipRepository, kế thừa JpaRepository.
+     
+     - Cung cấp sẵn các phương thức như findAll(), save(), deleteById(),... để thao tác với cơ sở dữ liệu mà không cần viết SQL thủ công.
 
    +Các thành phần chính trong project:
 | Thành phần     | Vai trò                                                                 |
@@ -125,7 +160,6 @@ GROUP 11
 | `Book`         | Đại diện cho sách: tiêu đề, tác giả, nhà xuất bản, số trang, tồn kho    |
 | `User`         | Người dùng hệ thống: tên, email, mật khẩu                               |
 | `BorrowSlip`   | Phiếu mượn: gán sách cho người dùng, ngày mượn, hạn trả, trạng thái trả |
-| `UserBorrowed` | Danh sách các phiếu mượn tương ứng với từng người dùng                  |
 
    +Quy trình xử lý:
      Ví dụ tạo phiếu mượn:
@@ -359,11 +393,4 @@ Thông báo thành công
 
   https://drive.google.com/file/d/1-E8mv4zfpATaSNrq6tVHuNXGUsdlmYEN/view?usp=sharing
 
-
-
-
- 
-
-
-
-
+  
