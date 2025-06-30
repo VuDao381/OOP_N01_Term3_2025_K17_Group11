@@ -32,7 +32,7 @@ GROUP 11
 
   + Lọc danh sách theo chữ cái đầu của sách theo thứ tự từ A-Z và ngược lại.
 
-  Quản lý người dùng
+ Quản lý người dùng
   
    + Thêm, sửa, xóa Người dùng (User).
 
@@ -40,7 +40,7 @@ GROUP 11
 
    + Hiển thị danh sách người dùng theo ID, email...
 
-  Quản lý phiếu mượn
+ Quản lý phiếu mượn
   
    + Gán sách cho người dùng thông qua phiếu mượn (BorrowSlip).
 
@@ -57,7 +57,8 @@ GROUP 11
    Hệ thống được thiết kế theo mô hình hướng đối tượng, mỗi thực thể đều được ánh xạ thành một lớp Java và tương ứng với bảng dữ liệu khi lưu trữ lâu dài.
    Dưới đây là bảng mô tả các thực thể chính:
    
-   -User (Người dùng)
+   - User (Người dùng)
+
 | Trường         | Kiểu dữ liệu | Mô tả                        |
 | ----------     | ------------ | ---------------------------- |
 | `id`           | `Long`       | Mã người dùng (tự động tăng) |
@@ -65,7 +66,9 @@ GROUP 11
 | `useremail`    | `String`     | Địa chỉ email                |
 | `userpassword` | `String`     | Mật khẩu đăng nhập           |
 
-   -Book (Sách)
+   - Book (Sách)
+
+
 | Trường      | Kiểu dữ liệu | Mô tả                  |
 | ----------- | ------------ | ---------------------- |
 | `id`        | `Long`       | Mã sách (tự động tăng) |
@@ -75,7 +78,7 @@ GROUP 11
 | `numPages`  | `int`        | Số trang               |
 | `quantity`  | `int`        | Số lượng còn trong kho |
 
-   -BorrowSlip (Phiếu mượn)
+   - BorrowSlip (Phiếu mượn)
 
 | Trường       | Kiểu dữ liệu          | Mô tả                                                        |
 | ------------ | --------------------- | ------------------------------------------------------------ |
@@ -91,7 +94,8 @@ GROUP 11
 
  <b>III: CÔNG NGHỆ :</b>
  -CÔNG NGHỆ ĐÃ SỬ DỤNG
-   + Frontend (Giao diện):
+ 
+Frontend (Giao diện):
 
    - Sử dụng Spring Boot kết hợp với Thymeleaf làm template engine để sinh ra các trang HTML động.
 
@@ -99,7 +103,7 @@ GROUP 11
 
    - Sử dụng các thư viện CSS như Tailwind CSS và Font Awesome
 
-   + Backend (Xử lý logic):
+Backend (Xử lý logic):
 
    - Ngôn ngữ: Java 17.
 
@@ -109,7 +113,7 @@ GROUP 11
 
    - Sử dụng Spring Web, Spring Data JPA.
 
-   + Lưu trữ dữ liệu:
+Lưu trữ dữ liệu:
 
    - Kết nối với MySQL thông qua Hibernate/JPA.
     
@@ -117,7 +121,7 @@ GROUP 11
     
    - Repository kế thừa JpaRepository để thao tác với CSDL.
 
-   + Công cụ phát triển:
+Công cụ phát triển:
 
    - IDE: Visual Studio Code
 
@@ -163,17 +167,17 @@ GROUP 11
 
    + Các thành phần chính trong project:
 
-    | Thành phần     | Vai trò                                                                 |
-    | -------------- | ----------------------------------------------------------------------- |
-    | `Book`         | Đại diện cho sách: tiêu đề, tác giả, nhà xuất bản, số trang, tồn kho    |
-    | `User`         | Người dùng hệ thống: tên, email, mật khẩu                               |
-    | `BorrowSlip`   | Phiếu mượn: gán sách cho người dùng, ngày mượn, hạn trả, trạng thái trả |
+   | Thành phần     | Vai trò                                                                 |
+   | -------------- | ----------------------------------------------------------------------- |
+   | `Book`         | Đại diện cho sách: tiêu đề, tác giả, nhà xuất bản, số trang, tồn kho    |
+   | `User`         | Người dùng hệ thống: tên, email, mật khẩu                               |
+   | `BorrowSlip`   | Phiếu mượn: gán sách cho người dùng, ngày mượn, hạn trả, trạng thái trả |
 
    + Quy trình xử lý:
    
-         Ví dụ tạo phiếu mượn:
+     Ví dụ tạo phiếu mượn:
      
-         User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
+     User nhập thông tin → Controller nhận request →Service xử lý: kiểm tra tồn kho, gán sách →Tạo BorrowSlip → Gán cho User →Hiển thị danh sách mượn
 
   <b>V. CẤU TRÚC THƯ MỤC:</b>
 
