@@ -414,8 +414,7 @@ BorrowSlipController kiểm tra:
 
 ## VIII. LƯU ĐỒ THUẬT TOÁN CỦA CHỨC NĂNG CHÍNH
 
-
-![HỆ THỐNG QUẢN LÝ THƯ VIỆN SÁCH SỐ HÓA](https://github.com/user-attachments/assets/2ee0f95e-200e-4c39-aaca-dac1b76aaf87)
+![Untitled Diagram drawio](https://github.com/user-attachments/assets/71dfb5f8-03ae-486e-8ade-ea26de8277e7)
 
 ## IX.GIAO DIỆN
 ### Trang chủ
