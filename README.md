@@ -266,100 +266,130 @@ OOP_N01_TERM3_2025_K17_GROUPX_QLTV/
 │   └── README.md                                # Mô tả phần Library core
 ```
  ## VI. MÔ HÌNH VÀ CHỨC NĂNG
-  1. Mô hình hệ thống – Kiến trúc MVC (Model - View - Controller)
-
-  Ứng dụng Quản lý thư viện sách số hóa được xây dựng theo mô hình MVC, gồm 3 thành phần chính:
  
-  + Model (Dữ liệu)
-  
-   Chứa các lớp đại diện cho các thực thể trong hệ thống:
+ 1. Mô hình hệ thống – Kiến trúc MVC (Model - View - Controller)
+    
+Hệ thống Quản lý Thư viện Sách số được xây dựng theo kiến trúc 3 lớp MVC chuẩn của Spring Boot:
 
-   User – người dùng (có thể là người mượn sách)
+#### Model (Dữ liệu)
 
-   Book – sách trong thư viện
+Chứa các lớp mô hình ánh xạ với bảng dữ liệu qua JPA/Hibernate:
 
-   BorrowSlip – phiếu mượn sách (gồm ngày mượn, hạn trả, trạng thái)
+User – đại diện người dùng (người mượn sách): id, username, useremail, userpassword.
 
+Book – đại diện sách trong thư viện: id, title, author, publisher, numPages, quantity.
 
-  + View (Giao diện)
+BorrowSlip – phiếu mượn sách: id, user, book, borrowDate, dueDate, isReturned, returnDate.
 
-   Sử dụng Thymeleaf để hiển thị các trang HTML động, ví dụ:
+Các class sử dụng annotation @Entity, @Table, và ánh xạ @ManyToOne để liên kết giữa Book, User, BorrowSlip.
 
-   Trang hiển thị danh sách sách đã mượn (user-borrowed.html)
+#### View (Giao diện)
 
-   Trang thông báo sách sắp đến hạn trả
+Giao diện động được tạo bằng Thymeleaf và các file HTML.
 
-   (Có thể mở rộng thêm: trang thêm user, sách, quản lý phiếu mượn...)
- 
-  + Controller (Điều hướng và xử lý)
+Hiển thị danh sách sách, người dùng, và phiếu mượn theo dữ liệu backend trả về.
 
-   Các controller tiếp nhận yêu cầu từ người dùng qua URL, xử lý logic và trả dữ liệu về View:
+Tích hợp TailwindCSS để tăng tính thẩm mỹ.
 
-   UserBorrowedController: Điều phối hiển thị danh sách sách đã mượn và thông báo sách sắp đến hạn trả.
+Có thể mở rộng thêm các giao diện thống kê, báo cáo, cảnh báo trễ hạn.
 
-   Các lớp UserBorrowed, LibrarySystem hoạt động như Service hỗ trợ xử lý logic trung gian
+#### Controller (Điều hướng & API)
 
-  2. Chức năng hệ thống (chia theo từng mô-đun)
-  
-  + Sách (Book)
+BookController: quản lý API sách (/api/books)
 
-   Thêm sách mới vào hệ thống (LibrarySystem.addBook())
+UserController: quản lý người dùng (/api/users)
 
-   Kiểm tra và cập nhật trạng thái sách đang được mượn hay không
+BorrowSlipController: quản lý phiếu mượn, trả sách, thống kê (/api/borrow-slips)
 
-   Hiển thị thông tin sách theo phiếu mượn
+Các controller sử dụng annotation REST như @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, kết hợp xử lý lỗi và logging rõ ràng bằng SLF4J.
 
-   Tìm sách theo tiêu đề (Check.findBookByTitle())
+#### Service Layer (Xử lý nghiệp vụ)
 
-   + Phiếu mượn (BorrowSlip)
+BookService, UserService, BorrowSlipService xử lý logic nghiệp vụ như:
 
-   Tạo phiếu mượn sách (LibrarySystem.MuonSach())
+Lưu/xoá/sửa dữ liệu
 
-   Kiểm tra trạng thái quá hạn (Check.checkAndDisplayOverdue())
+Tìm kiếm, lọc, thống kê sách mượn nhiều nhất
 
-   Thông báo sách sắp đến hạn trả trong 3 ngày (UserBorrowed.notifyUpcomingDueDates())
+Kiểm tra quá hạn, đánh dấu đã trả
 
-   Lưu danh sách phiếu mượn (UserBorrowed.addBorrowSlip())
+Phân tích phiếu mượn trong khoảng thời gian
 
-  + Người dùng (User)
+#### Repository Layer (Truy vấn CSDL)
+
+Sử dụng Spring Data JPA:
+
+BookRepository, UserRepository, BorrowSlipRepository
+
+Có các phương thức tuỳ chỉnh như:
+
+findByTitleContainingIgnoreCase()
+
+countOverdueBetween()
+
+findTopBorrowedBooks() dùng @Query
+
+2. Chức năng hệ thống (chia theo từng mô-đun)
    
-   Thêm, sửa, xóa người dùng (UserManagement)
+#### Sách (Book)
+Thêm, cập nhật, xoá sách (BookController, BookService)
 
-   Tìm người dùng theo ID (Check.findUserById())
+Tìm sách theo tiêu đề, tác giả, nhà xuất bản
 
-   Hiển thị sách đã mượn theo người dùng (UserBorrowed.displayUserBorrowedBooks())
-   
-  + Thống kê và thông báo
+Thống kê sách được mượn nhiều nhất
 
-   Thống kê số sách sắp đến hạn trả (giao diện và dòng lệnh)
+Tìm kiếm toàn cục theo từ khoá
 
-   Liệt kê phiếu mượn quá hạn (console)
+#### Phiếu mượn (BorrowSlip)
+Tạo phiếu mượn mới từ User + Book + ngày mượn + hạn trả
 
-   Hiển thị danh sách sách đã mượn cho từng người dùng
+Cập nhật trạng thái isReturned, returnDate
 
-  3. Luồng xử lý chức năng tiêu biểu
+Đánh dấu trả sách
 
-     Ví dụ: Mượn sách
+Thống kê sách quá hạn, gần đến hạn (dựa vào dueDate)
 
-   Người dùng được thêm hoặc đã tồn tại
+Hiển thị 5 phiếu mượn mới nhất
 
-   Người dùng chọn sách muốn mượn (phải còn tồn kho)
+Thống kê sách mượn nhiều nhất
 
-   Nhập ngày mượn và hạn trả
+#### Người dùng (User)
 
-   Gọi MuonSach(user, bookTitle, borrowDate, dueDate)
+Thêm, cập nhật, xoá người dùng
 
-   Hệ thống kiểm tra tình trạng sách:
+Tìm người dùng theo ID, username, email
 
-   Nếu sách không tồn tại → thông báo lỗi
+Thống kê tổng số người dùng
 
-   Nếu sách đã bị mượn → từ chối mượn
+#### Thống kê & báo cáo
 
-   Nếu hợp lệ → tạo BorrowSlip, thêm vào danh sách
+Số lượng sách đang được mượn
 
-   Cập nhật trạng thái sách thành “đang mượn”
+Số sách quá hạn chưa trả
 
-   Thông báo thành công
+Sách mượn phổ biến nhất
+
+Lượt mượn sách trong từng khoảng thời gian
+
+3. Luồng xử lý chức năng tiêu biểu – Mượn sách
+
+Người dùng gửi yêu cầu mượn sách qua frontend.
+
+Backend nhận thông tin gồm: userId, bookId, borrowDate, dueDate.
+
+BorrowSlipController kiểm tra:
+
+User và Book có tồn tại?
+
+Sách còn tồn kho?
+
+Nếu hợp lệ:
+
+Tạo mới BorrowSlip, gán user và book
+
+Lưu thông tin vào cơ sở dữ liệu
+
+Gửi phản hồi thành công về frontend.
 
 ## VII. DIAGRAMS
 
